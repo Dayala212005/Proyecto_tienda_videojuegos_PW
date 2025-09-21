@@ -2,21 +2,22 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Tienda de Videojuegos</title>
 </head>
 <body>
     <!-- header (coso de arriba) -->
-    <header>
-        <nav>
-            <img src="imagenes/logo.jpg" alt="Logo de la tienda" width="100">
-            <a href="#">Noticias</a>
-            <a href="#">Lo mas vendido</a>
-            <input type="text" placeholder="Buscar juegos...">
+    <header id="header">
+        <nav id="nav_bar">
+            <img id="logo" src="imagenes/logo.jpg" alt="Logo de la tienda" width="100">
+            <a id="Noticias" href="#">Noticias</a>
+            <a id="mas_vendidos" href="#">Lo mas vendido</a>
+            <input id="buscar_juegos" type="text" placeholder="Buscar juegos...">
         </nav>
     </header>
 
     <main>
-        <h1>Titulo</h1>
+        <h1 id="Titulo">Titulo</h1>
 
         <!-- Seccion de destacados -->
         <section id="destacados">
@@ -58,8 +59,8 @@
         </section>
 
         <!-- Seccion de categorias populares -->
-        <section id="categorias">
-            <h2>Categorías populares</h2>
+        <section class="categorias">
+            <h2 id="Titulo_categoria">Categorías populares</h2>
             <div class="categorias-grid">
                 <div class="categoria">
                     <img src="imagenes/logo.jpg" alt="Accion" width="100">
