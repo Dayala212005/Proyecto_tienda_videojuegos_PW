@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Videojuegos - Detalle del Juego</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="styles_juegos.css">
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <img src="imagenes/logo.jpg" alt="Logo de la tienda" width="100">
-            <a href="">Noticias</a>
-            <a href="">Lo más vendido</a>
+    <header id="header">
+        <nav id="nav-principal">
+            <img src="imagenes/logo.jpg" alt="Logo de la tienda" width="100" id="img">
+            <a href="#" class="nav-link">Noticias</a>
+            <a href="" class="nav-link">Lo más vendido</a>
             <input type="text" placeholder="Buscar juegos...">
         </nav>
     </header>
 
     <!-- Seccion principal del juego -->
-    <main>
-        <section>
-            <img src="imagenes/portada_juego.jpg" alt="Portada del juego">
-            <div>
-                <h1>Nombre del Juego</h1>
+    <main id="main">
+        <section id="detalle-juego">
+            <img src="imagenes/portada_juego.jpg" alt="Portada del juego" id="portada-juego">
+            <div id="info-juego">
+                <h1 id="titulo-juego">Nombre del Juego</h1>
                 <p><b>Fecha de lanzamiento:</b> 21 Septiembre 2025</p>
                 <p><b>Desarrollador:</b> Shifu</p>
                 <p><b>Género:</b> Acción, Aventura</p>
                 <p><b>Etiquetas:</b> Multijugador, ficcion</p>
                 <p><b>Precio:</b> $30</p>
-                <div>
+                <div id="botones-compra">
                     <button>Comprar ahora</button>
                     <button>Añadir al carrito</button>
                     <button>Añadir a favoritos</button>
@@ -38,8 +39,8 @@
         </section>
 
         <!-- Descripción -->
-        <section>
-            <h2>Descripción del juego</h2>
+        <section id="descripcion-juego">
+            <h2 id="titulo-descripcion">Descripción del juego</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipiscing elit luctus hendrerit, mi nostra etiam vel
                 varius ligula penatibus ac pharetra himenaeos, nibh tellus quis dis sodales pellentesque aliquam aptent.
@@ -53,19 +54,19 @@
         </section>
 
         <!-- Requisitos del sistema -->
-        <section>
-            <h2>Requisitos del sistema</h2>
+        <section id="requisitos-juego">
+            <h2 id="titulo-sistema">Requisitos del sistema</h2>
 
-            <div>
-                <button>Windows</button>
-                <button>macOS</button>
-                <button>SteamOS + Linux</button>
+            <div id="boton-sistema">
+                <button id="Windows">Windows</button>
+                <button id="mac">macOS</button>
+                <button id="linux">SteamOS + Linux</button>
             </div>
 
             <!-- Contenedor de requisitos -->
-            <div>
-                <div>
-                    <h3>Mínimo:</h3>
+            <div id="contenedor-requisitos">
+                <div id="minimo">
+                    <h3 id="minimo">Mínimo:</h3>
                     <ul>
                         <li><b>SO:</b> Windows 10 version 21H1 (build 19043) o superior</li>
                         <li><b>Procesador:</b> Intel Core i3-3240, AMD FX-4300</li>
@@ -76,9 +77,9 @@
                     </ul>
                 </div>
 
-                <div>
-                    <h3>Recomendado:</h3>
-                    <ul>
+                <div id="recomendado">
+                    <h3 id="minimo">Recomendado:</h3>
+                    <ul id="">
                         <li><b>SO:</b> Windows 10 version 21H1 (build 19043) o superior</li>
                         <li><b>Procesador:</b> Intel Core i5-3470</li>
                         <li><b>Memoria:</b> 8 GB RAM</li>
@@ -92,23 +93,23 @@
 
 
         <!--Sección de Logros -->
-        <section>
-            <h2>Logros del juego</h2>
+        <section id="logros">
+            <h2 id="titulo-logro">Logros del juego</h2>
             <ul>
                 <li>
-                    <img src="imagenes/logro.png" alt="Icono logro 1">
+                    <img src="imagenes/logro.png" alt="Icono logro 1" id="img-logro">
                     <b>Primer paso:</b> Completa el tutorial.
                 </li>
                 <li>
-                    <img src="imagenes/logro.png" alt="Icono logro 2">
+                    <img src="imagenes/logro.png" alt="Icono logro 2" id="img-logro">
                     <b>Cazador experto:</b> Derrota a 100 enemigos.
                 </li>
                 <li>
-                    <img src="imagenes/logro.png" alt="Icono logro 3">
+                    <img src="imagenes/logro.png" alt="Icono logro 3" id="img-logro">
                     <b>Explorador:</b> Descubre todas las zonas del mapa.
                 </li>
                 <li>
-                    <img src="imagenes/logro.png" alt="Icono logro 4">
+                    <img src="imagenes/logro.png" alt="Icono logro 4 id=" img-logro" id="img-logro">
                     <b>Campeón:</b> Gana una partida multijugador.
                 </li>
             </ul>
@@ -116,7 +117,7 @@
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer id="footer">
         <a href="">Contacto</a>
         <a href="">¿Quiénes somos?</a>
         <a href="">Políticas de privacidad</a>

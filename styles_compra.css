@@ -23,17 +23,18 @@ body {
 }
 
 #nav_bar {
-    display: flex;           
-    align-items: center;     
-    justify-content: space-between; 
-    gap: 20px;   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 #logo {
-    height: 50px;
+    border-radius: 8px;
 }
 
-#noticias, #mas_vendidos {
+#noticias,
+#mas_vendidos {
     color: white;
     text-decoration: none;
     margin: 0 10px;
