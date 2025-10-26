@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Juego from "../components/Juego";
 import Categoria from "../components/Categoria";
-import "../styles/style.css";
+
 
 function Home() {
   return (
@@ -32,11 +32,19 @@ function Home() {
         <section className="categorias">
           <h2 id="Titulo_categoria">Categorías populares</h2>
           <div className="categorias-grid">
-            {["Acción","Terror","Aventura","Deportes","Simulación","Rol","Puzzle","Estrategia","Multijugador","Indie"].map(nombre => (
-              <Categoria key={nombre} nombre={nombre} imagen="/imagenes/logo.jpg" />
-            ))}
+            <Categoria nombre="Acción" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Terror" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Aventura" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Deportes" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Simulación" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Rol" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Puzzle" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Estrategia" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Multijugador" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Indie" imagen="/imagenes/logo.jpg" />
           </div>
         </section>
+
       </main>
       <Footer />
     </>

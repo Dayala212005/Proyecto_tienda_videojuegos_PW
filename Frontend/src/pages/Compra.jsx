@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Juego from "../components/Juego";
-import "../styles/styles_compra.css";
+
 
 function Compra() {
   return (
