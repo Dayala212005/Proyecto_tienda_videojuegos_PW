@@ -2,13 +2,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Juego from "../components/Juego";
 import Categoria from "../components/Categoria";
-
+import CarouselDestacados from "../components/CarouselDestacados";
 
 function Home() {
   return (
     <>
       <Header />
       <main>
+        <CarouselDestacados />
         <h1 id="Titulo">Titulo</h1>
 
         <section id="destacados">
@@ -28,6 +29,7 @@ function Home() {
           <Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />
           <Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />
         </section>
+        
 
         <section className="categorias">
           <h2 id="Titulo_categoria">Categorías populares</h2>
