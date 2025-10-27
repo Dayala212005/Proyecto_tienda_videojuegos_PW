@@ -4,21 +4,21 @@ import { UncontrolledCarousel } from "reactstrap";
 const CarouselDestacados = () => {
   const items = [
     {
-      src: "/imagenes/logo.jpg",
+      src: "/Frontend/public/imagenes/portada_juego.jpg",
       altText: "Juego 1",
       caption: "¡Aventura Épica!",
       header: "The Legend of React",
       key: "1",
     },
     {
-      src: "/imagenes/logo.jpg",
+      src: "/Frontend/public/imagenes/portada_juego.jpg",
       altText: "Juego 2",
       caption: "Corre, dispara y sobrevive",
       header: "Cyber Runner 2085",
       key: "2",
     },
     {
-      src: "/imagenes/logo.jpg",
+      src: "/Frontend/public/imagenes/portada_juego.jpg",
       altText: "Juego 3",
       caption: "Domina los cielos",
       header: "Sky Warriors",
