@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import "../styles/styles_juegos.css";
 
 function DetalleJuego() {
   return (
