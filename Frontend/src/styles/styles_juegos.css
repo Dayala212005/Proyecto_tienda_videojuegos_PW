@@ -6,13 +6,13 @@
 }
 
 body {
-    background-color: #0d1117;
-    color: #e0e0e0;
+    background-color: hsl(210, 23%, 95%);
+    color: #080808;
     line-height: 1.6;
 }
 
 #header {
-    background-color: #1a1f29;
+    background-color: #000000;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -40,6 +40,10 @@ body {
 }
 
 #detalle-juego {
+    color: #c9d1d9;
+}
+
+#detalle-juego {
     background-color: #161b22;
     border-radius: 10px;
     padding: 20px;
@@ -55,6 +59,9 @@ body {
 #titulo-juego {
     color: #1bf7e5;
     margin-bottom: 10px;
+}
+#descripcion-juego{
+    color: #c9d1d9;
 }
 
 #botones-compra button {
@@ -92,7 +99,7 @@ body {
 
 /*Descripcion del juego*/
 #descripcion-juego {
-    background-color: #161b22;
+    background-color: #1a1f29;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -106,11 +113,12 @@ body {
 
 /* Requisitos*/
 #requisitos-juego {
-    background-color: #161b22;
+    background-color: #1a1f29;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: #c9d1d9;
 }
 
 #boton-sistema button {
@@ -151,10 +159,6 @@ body {
     margin-bottom: 10px;
 }
 
-#minimo {
-    color: #c9d1d9;
-}
-
 ul {
     list-style: none;
 }
@@ -165,11 +169,12 @@ ul li {
 
 /* Logros */
 #logros {
-    background-color: #161b22;
+    background-color: #1a1f29;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: #c9d1d9;
 }
 
 #titulo-logro {
