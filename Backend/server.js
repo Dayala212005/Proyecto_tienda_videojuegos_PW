@@ -2,7 +2,7 @@ import express from "express";
 import fetch from "node-fetch";
 
 const app = express();
-app.use(express.json()); // Permite peticiones desde React
+app.use(express.json()); 
 const PORT = 4000;
 
 // Obtener todos los juegos
@@ -31,7 +31,7 @@ app.get("/api/game/:id", async (req, res) => {
 // Filtrar por plataforma
 app.get("/api/games/platform/:platform", async (req, res) => {
   const { platform } = req.params;
-  const url = new URL(`https://www.freetogame.com/api/filter`);
+  const url = new URL(`https://www.freetogame.com/api/games`);
   url.searchParams.append("platform", platform);
 
   console.log("→ Consultando:", url.href);
@@ -49,7 +49,7 @@ app.get("/api/games/platform/:platform", async (req, res) => {
 // Filtrar por categoría
 app.get("/api/games/category/:category", async (req, res) => {
   const { category } = req.params;
-  const url = new URL(`https://www.freetogame.com/api/filter`);
+  const url = new URL(`https://www.freetogame.com/api/games`);
   url.searchParams.append("category", category);
 
   console.log("→ Consultando:", url.href);
@@ -67,7 +67,7 @@ app.get("/api/games/category/:category", async (req, res) => {
 // Ordenar (sort-by)
 app.get("/api/games/sort/:orden", async (req, res) => {
   const { orden } = req.params;
-  const url = new URL(`https://www.freetogame.com/api/filter`);
+  const url = new URL(`https://www.freetogame.com/api/games`);
   url.searchParams.append("sort-by", orden);
 
   console.log("→ Consultando:", url.href);
