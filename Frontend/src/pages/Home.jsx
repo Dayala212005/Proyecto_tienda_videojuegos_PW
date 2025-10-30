@@ -10,9 +10,9 @@ import Fondo from "../components/fondo.jsx";
 function Home() {
   return (
     <>
-      
+
       <Header />
-      
+
       <main>
         <Fondo />
         <div className="animated-gradient-text">
@@ -46,16 +46,16 @@ function Home() {
         <section className="categorias">
           <h2 id="Titulo_categoria">Categorías populares</h2>
           <div className="categorias-grid">
-            <Categoria nombre="Acción" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Terror" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Aventura" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Deportes" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Simulación" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Rol" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Puzzle" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Estrategia" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Multijugador" imagen="/imagenes/logo.jpg" />
-            <Categoria nombre="Indie" imagen="/imagenes/logo.jpg" />
+            <Categoria nombre="Acción" imagen="/imagenes/shooter.jpg" />
+            <Categoria nombre="Terror" imagen="/imagenes/horror.jpg" />
+            <Categoria nombre="Aventura" imagen="/imagenes/aventura.png" />
+            <Categoria nombre="Deportes" imagen="/imagenes/sports.jpg" />
+            <Categoria nombre="Simulación" imagen="/imagenes/simulacion.jpg" />
+            <Categoria nombre="Rol/MMORPG" imagen="/imagenes/rol.jpg" />
+            <Categoria nombre="Puzzle" imagen="/imagenes/puzzel.webp" />
+            <Categoria nombre="Estrategia" imagen="/imagenes/estrategia.webp" />
+            <Categoria nombre="Multijugador" imagen="/imagenes/sports2.png" />
+            <Categoria nombre="Indie" imagen="/imagenes/idie.webp" />
           </div>
         </section>
 
