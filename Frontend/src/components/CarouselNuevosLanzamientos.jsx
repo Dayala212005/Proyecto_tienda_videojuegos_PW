@@ -2,11 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { data } from 'react-router-dom';
 
-function CarouselDestacados() {
+function CarouselNuevosLanzamientos() {
   const [topGames, setTopGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/games/top")
+    fetch("http://localhost:4000/api/games/release")
     .then(res => res.json())
     .then(data => {
       console.log("Datos recividos de la api: " ,data);
@@ -15,11 +15,11 @@ function CarouselDestacados() {
   }, []);
 
   return (
-    <div id="carouselDestacados" className="carousel slide" data-bs-ride="carousel">
+    <div id="carouselNuevos" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-indicators">
-        <button type="button" data-bs-target="#carouselDestacados" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselDestacados" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselDestacados" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselNuevos" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselNuevos" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselNuevos" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
@@ -44,11 +44,11 @@ function CarouselDestacados() {
             </div>
         </div>
       </div>
-      <button className="carousel-control-prev" type="button" data-bs-target="#carouselDestacados" data-bs-slide="prev">
+      <button className="carousel-control-prev" type="button" data-bs-target="#carouselNuevos" data-bs-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Previous</span>
       </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#carouselDestacados" data-bs-slide="next">
+      <button className="carousel-control-next" type="button" data-bs-target="#carouselNuevos" data-bs-slide="next">
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
@@ -56,4 +56,4 @@ function CarouselDestacados() {
   );
 }
 
-export default CarouselDestacados;
+export default CarouselNuevosLanzamientos;

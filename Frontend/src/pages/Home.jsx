@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import Juego from "../components/Juego";
 import Categoria from "../components/Categoria";
 import CarouselDestacados from "../components/CarouselDestacados";
+import CarouselNuevosLanzamientos from "../components/CarouselNuevosLanzamientos.jsx";
+import CarouselOfertas from "../components/CarouselOfertas.jsx";
 import "../styles/style.css";
 import Fondo from "../components/fondo.jsx";
 
@@ -32,14 +34,14 @@ function Home() {
           <h2>Ofertas</h2>
           {/*<Juego imagen="/imagenes/logo.jpg" alt="Juego en oferta" descripcion="Descripción breve del juego en oferta" />
           <Juego imagen="/imagenes/logo.jpg" alt="Juego en oferta" descripcion="Descripción breve del juego en oferta" />*/}
-          <CarouselDestacados />
+          <CarouselOfertas />
         </section>
 
         <section id="nuevos">
           <h2>Nuevos lanzamientos</h2>
           {/*<Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />
           <Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />*/}
-          <CarouselDestacados />
+          <CarouselNuevosLanzamientos />
         </section>
 
 
