@@ -1,6 +1,19 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
+import { data } from 'react-router-dom';
 
 function CarouselDestacados() {
+  const [topGames, setTopGames] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/games/top")
+    .then(res => res.json())
+    .then(data => {
+      console.log("Datos recividos de la api: " ,data);
+      setTopGames(data)})
+    .catch(err => console.error("Error al obtener datos", err));
+  }, []);
+
   return (
     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-indicators">
@@ -10,24 +23,24 @@ function CarouselDestacados() {
       </div>
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="https://picsum.photos/id/123/1200/400" className="d-block w-100" alt="..."/>
+          <img src={topGames[0]?.thumbnail || "https://picsum.photos/id/123/1200/400"} className="d-block w-100" alt={topGames[0]?.title || "Juego 1"}/>
             <div className="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              <h5>{topGames[0]?.title || "Juego 1"}</h5>
+              <p>{topGames[0]?.short_description || "Descripción del primer juego."}</p>
             </div>
         </div>
         <div className="carousel-item">
-          <img src="https://picsum.photos/id/456/1200/400" className="d-block w-100" alt="..."/>
+          <img src={topGames[1]?.thumbnail || "https://picsum.photos/id/123/1200/400"} className="d-block w-100" alt={topGames[1]?.title || "Juego 2"}/>
             <div className="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <h5>{topGames[1]?.title || "Juego 2"}</h5>
+              <p>{topGames[1]?.short_description || "Descripción del primer juego."}</p>
             </div>
         </div>
         <div className="carousel-item">
-          <img src="https://picsum.photos/id/678/1200/400" className="d-block w-100" alt="..."/>
+          <img src={topGames[2]?.thumbnail || "https://picsum.photos/id/123/1200/400"} className="d-block w-100" alt={topGames[2]?.title || "Juego 3"}/>
             <div className="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+              <h5>{topGames[2]?.title || "Juego 3"}</h5>
+              <p>{topGames[2]?.short_description || "Descripción del primer juego."}</p>
             </div>
         </div>
       </div>

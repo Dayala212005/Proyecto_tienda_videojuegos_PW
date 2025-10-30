@@ -1,10 +1,23 @@
 import express from "express";
 import fetch from "node-fetch";
+import cors from "cors";
 
 const app = express();
 app.use(express.json()); 
+app.use(cors());
 const PORT = 4000;
 
+//Endpoint para obtener los 3 juegos mas populares
+app.get("/api/games/top", async (req, res) => {
+  try {
+    const respuesta = await fetch("https://www.freetogame.com/api/games?sort-by=popularity");
+    const datos = await respuesta.json();
+    const top3 = datos.slice(0, 3);
+    res.json(top3);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener los juegos" });
+  }
+})
 // Obtener todos los juegos
 app.get("/api/games", async (req, res) => {
   try {
