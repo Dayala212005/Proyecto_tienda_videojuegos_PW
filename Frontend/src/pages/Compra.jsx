@@ -1,13 +1,16 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Juego from "../components/Juego";
+import Fondo from "../components/fondo.jsx";
 import "../styles/styles_compra.css";
+
 
 function Compra() {
   return (
     <>
       <Header />
       <main>
+        <Fondo />
         <h1 id="Titulo">Tu carrito de compra</h1>
         <div className="cart-container">
           <div className="cart-preview">
@@ -23,7 +26,6 @@ function Compra() {
           </div>
           <div className="cart-checkout">
             <p className="total">Total estimado: <strong>$6.99</strong></p>
-            <p className="note">Los impuestos se calcularán al pagar</p>
             <button className="checkout-btn">Continuar al pago</button>
           </div>
         </div>

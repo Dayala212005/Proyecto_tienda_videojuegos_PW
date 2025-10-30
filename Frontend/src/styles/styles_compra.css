@@ -13,6 +13,12 @@ body {
     padding: 20px;
 }
 
+.galaxy-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 #header {
     display: flex;
     justify-content: space-between;
@@ -49,6 +55,8 @@ body {
 
 #Titulo {
     text-align: center;
+    color: #00c3ff;
+    text-shadow: 0 0 8px #00c3ff55;
     margin: 20px 0;
     font-size: 2rem;
 }
@@ -60,12 +68,12 @@ h1 {
 .cart-container {
     display: flex;
     justify-content: space-between;
-    background-color: #1a2539;
+    background-color: #111111;
     padding: 20px;
     border-radius: 5px;
     max-width: 800px;
     margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: 0 0 15px rgba(0,195,255,0.4);
 }
 
 .cart-preview {
@@ -81,6 +89,7 @@ h1 {
 
 .cart-details h3 {
     margin: 0;
+    color: #bbb;
     font-size: 1.2rem;
 }
 
@@ -110,13 +119,8 @@ h1 {
 
 .total {
     font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.note {
     color: #bbb;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .checkout-btn {
