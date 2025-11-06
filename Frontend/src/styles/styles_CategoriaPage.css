@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+.titulo-categoria {
+    font-family: 'Creepster', cursive;
+    width: fit-content;      
+    margin: 0 auto 30px auto; 
+    color: #f7f9fa;
+    text-align: center;
+    font-size: 3rem;          /* tamaño grande (puede ajustar) */
+    transition: text-shadow 0.3s ease;
+}
+.titulo-categoria:hover {
+    text-shadow: 0 0 10px #8f28e4,
+                 0 0 20px #e740be,
+                 0 0 30px #e740be;  
+}
+.juegos-grid{
+    color: #f7f9fa;
+}

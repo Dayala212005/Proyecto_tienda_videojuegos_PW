@@ -4,11 +4,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Juego from "../components/Juego";
 import "../styles/style.css";
+import "../styles/styles_CategoriaPage.css"
 
 function CategoriaPage() {
   const { nombre } = useParams();
   const [juegos, setJuegos] = useState([]);
   const [cargando, setCargando] = useState(true);
+
 
   useEffect(() => {
     const obtenerJuegos = async () => {
@@ -51,7 +53,7 @@ function CategoriaPage() {
       <Header />
       <main>
         <h2 className="titulo-categoria">Juegos de {nombre}</h2>
-
+    
         {cargando ? (
           <p>Cargando juegos...</p>
         ) : juegos.length > 0 ? (
