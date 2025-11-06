@@ -7,6 +7,7 @@ import CarouselNuevosLanzamientos from "../components/CarouselNuevosLanzamientos
 import CarouselOfertas from "../components/CarouselOfertas.jsx";
 import "../styles/style.css";
 import Fondo from "../components/fondo.jsx";
+import CategoriaLink from "../components/CategoriaLink";
 
 
 function Home() {
@@ -48,16 +49,16 @@ function Home() {
         <section className="categorias">
           <h2 id="Titulo_categoria">Categorías populares</h2>
           <div className="categorias-grid">
-            <Categoria nombre="Acción" imagen="/imagenes/shooter.jpg" />
-            <Categoria nombre="Terror" imagen="/imagenes/horror.jpg" />
-            <Categoria nombre="Aventura" imagen="/imagenes/aventura.png" />
-            <Categoria nombre="Deportes" imagen="/imagenes/sports.jpg" />
-            <Categoria nombre="Simulación" imagen="/imagenes/simulacion.jpg" />
-            <Categoria nombre="Rol/MMORPG" imagen="/imagenes/rol.jpg" />
-            <Categoria nombre="Puzzle" imagen="/imagenes/puzzel.webp" />
-            <Categoria nombre="Estrategia" imagen="/imagenes/estrategia.webp" />
-            <Categoria nombre="Multijugador" imagen="/imagenes/sports2.png" />
-            <Categoria nombre="Indie" imagen="/imagenes/idie.webp" />
+            <CategoriaLink nombre="Acción" imagen="/imagenes/shooter.jpg" />
+            <CategoriaLink nombre="Terror" imagen="/imagenes/horror.jpg" />
+            <CategoriaLink nombre="Aventura" imagen="/imagenes/aventura.png" />
+            <CategoriaLink nombre="Deportes" imagen="/imagenes/sports.jpg" />
+            <CategoriaLink nombre="Simulación" imagen="/imagenes/simulacion.jpg" />
+            <CategoriaLink nombre="Rol/MMORPG" imagen="/imagenes/rol.jpg" />
+            <CategoriaLink nombre="Puzzle" imagen="/imagenes/puzzel.webp" />
+            <CategoriaLink nombre="Estrategia" imagen="/imagenes/estrategia.webp" />
+            <CategoriaLink nombre="Multijugador" imagen="/imagenes/sports2.png" />
+            <CategoriaLink nombre="Indie" imagen="/imagenes/idie.webp" />
           </div>
         </section>
 
