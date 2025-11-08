@@ -1,9 +1,13 @@
-function Juego({ imagen, alt, descripcion, precio }) {
+import { Link } from "react-router-dom";
+
+function Juego({ id, imagen, alt, descripcion }) {
   return (
     <div className="juego">
-      <img src={imagen} alt={alt} width="100" />
+      <Link to={`/descarga/${id}`} style={{ textDecoration: "none" }}>
+        <img src={imagen} alt={alt} width="100" />
+      </Link>
       <p>{descripcion}</p>
-      {precio && <p className="price">{precio}</p>}
+      <Link to={`/descarga/${id}`} className="checkout-btn">Descargar</Link>
     </div>
   );
 }
