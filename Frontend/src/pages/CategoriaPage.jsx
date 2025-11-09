@@ -60,7 +60,7 @@ function CategoriaPage() {
           <div className="juegos-grid">
             {juegos.map((juego) => (
               <Juego
-                key={juego.id}
+                id = {juego.id}
                 imagen={juego.thumbnail}
                 alt={juego.title}
                 descripcion={juego.title}
