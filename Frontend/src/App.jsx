@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />       {/* Página de inicio */}
         <Route path="/descarga/:id" element={<Descarga />} /> {/* Página de descarga */}
-        <Route path="/juego" element={<DetalleJuego />} /> {/* Página de detalle */}
+        <Route path="/juego/:id" element={<DetalleJuego />} /> {/* Página de detalle */}
         <Route path="/categoria/:nombre" element={<CategoriaPage />} /> {/* pagina de categoria */}
       </Routes>
     </Router>

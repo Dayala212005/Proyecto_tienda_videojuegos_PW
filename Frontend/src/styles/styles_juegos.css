@@ -220,3 +220,128 @@ footer p {
     font-size: 14px;
     color: #8b949e;
 }
+
+/* ===== Detalle estilo Steam ===== */
+.detalle-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  padding: 24px;
+}
+
+.detalle-media { display: flex; flex-direction: column; gap: 16px; }
+
+.detalle-hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+.detalle-hero-img { width: 100%; height: 100%; object-fit: cover; }
+.detalle-hero-placeholder {
+  width: 100%; height: 100%;
+  display: grid; place-content: center; color: #999;
+}
+
+.detalle-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+.thumb-btn {
+  border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 8px;
+  overflow: hidden; outline: 2px solid transparent;
+}
+.thumb-btn img { width: 100%; height: 80px; object-fit: cover; display: block; }
+.thumb-btn.active { outline-color: #1a73e8; }
+
+.detalle-desc { background: #0d0d0d; padding: 16px; border-radius: 12px; }
+.detalle-title { margin: 0 0 6px; font-size: 28px; }
+.detalle-short { color: #c8c8c8; margin-bottom: 10px; }
+.detalle-long { color: #e6e6e6; line-height: 1.6; }
+
+.detalle-sidebar { display: flex; flex-direction: column; gap: 16px; }
+.panel {
+  background: #0f1115;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+.panel-info .row-item {
+  display: flex; justify-content: space-between; gap: 10px;
+  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.panel-info .row-item:last-child { border-bottom: 0; }
+.panel-info .label { color: #aaa; }
+
+.panel-tags h3, .panel-req h3 { margin: 0 0 10px; font-size: 18px; }
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  background: #1f2937;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.panel-cta .full {
+  display: block; text-align: center; width: 100%;
+}
+.link-sec {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #9ec3ff;
+  text-decoration: none;
+}
+.link-sec:hover { text-decoration: underline; }
+
+.panel-req ul { margin: 0; padding-left: 18px; }
+.panel-req li { margin: 6px 0; color: #ddd; }
+
+/* Responsive */
+@media (max-width: 992px) {
+  .detalle-layout { grid-template-columns: 1fr; }
+  .detalle-sidebar { order: -1; }
+}
+
+/* ===== Fondo galaxia como en Home ===== */
+.page-with-bg {
+  position: relative; /* para apilar contenido por encima del fondo */
+  min-height: 100%;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  /* oscurece un poco el fondo para mejorar legibilidad */
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: 0;
+}
+
+/* Asegura que el contenido principal quede delante del overlay/fondo */
+.content-foreground {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Modal fullscreen (Steam style) ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+.modal-fullscreen-img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(255,255,255,.25);
+}
