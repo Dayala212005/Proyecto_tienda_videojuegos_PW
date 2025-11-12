@@ -6,6 +6,21 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const PORT = 4000;
+// Llamado a la base de datos
+app.get("/api/favoritos/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  //Datos de prueba (simulan una base de datos)
+  const favoritos = {
+    "1": [540, 521, 452], // usuario 1 tiene 3 juegos favoritos
+    "2": [452, 517, 475], // usuario 2 otros
+  };
+
+  // Si el usuario no existe, devuelve un arreglo vacío
+  const favoritosUsuario = favoritos[userId] || [];
+  res.json(favoritosUsuario);
+});
+
 //Endpoint para obtener tres juegos mas recientes
 app.get("/api/games/release", async (req, res) => {
   try {

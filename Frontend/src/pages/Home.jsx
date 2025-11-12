@@ -17,7 +17,7 @@ function Home() {
       <Header />
 
       <main>
-        <Fondo />
+        
         <div className="animated-gradient-text">
           <span className="text-content">
             Más que juegos, experiencias épicas.
@@ -64,6 +64,7 @@ function Home() {
 
       </main>
       <Footer />
+      <Fondo />
     </>
   );
 }

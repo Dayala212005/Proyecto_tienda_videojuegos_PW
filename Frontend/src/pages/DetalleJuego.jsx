@@ -74,10 +74,10 @@ function DetalleJuego() {
 
   return (
     <>
+    <Fondo />
       <Header />
       {/* ✅ mismo patrón que Home: Fondo + overlay detrás del contenido */}
       <main id="main" className="page-with-bg">
-        <Fondo />
         <div className="bg-overlay" />
 
         <section id="detalle-juego" className="detalle-layout content-foreground">
