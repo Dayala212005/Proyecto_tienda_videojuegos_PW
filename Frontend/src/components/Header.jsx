@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="d-flex align-items-center">
-      <a className="navbar-brand me-3" href="#">
-        <img src="/imagenes/Logo2.png" alt="Mi Logo" width="120" height="auto" />
-      </a>
+      
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-grow-1">
         <div className="container-fluid">
+          <Link className="navbar-brand me-3" to="/">
+        <img src="/imagenes/Logo2.png" alt="Mi Logo" width="60" height="auto" />
+      </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -24,11 +25,7 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#">Noticias</a>
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
 
               {/* 🔹 Nuevo botón Favoritos que lleva a /descarga */}
@@ -43,9 +40,18 @@ function Header() {
                   Cuenta
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Iniciar Sesión</a></li>
-                  <li><a className="dropdown-item" href="#">Registrarse</a></li>
+                  <li>
+                    <Link className="dropdown-item" to="/login">
+                      Iniciar Sesión
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/register">
+                      Registrarse
+                    </Link>
+                  </li>
                 </ul>
+
               </li>
             </ul>
 
