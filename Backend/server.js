@@ -1,6 +1,7 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,8 @@ app.get("/api/favoritos/:userId", (req, res) => {
   const favoritosUsuario = favoritos[userId] || [];
   res.json(favoritosUsuario);
 });
+
+app.use("/api/users", userRoutes);
 
 //Endpoint para obtener tres juegos mas recientes
 app.get("/api/games/release", async (req, res) => {
