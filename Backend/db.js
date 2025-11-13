@@ -7,7 +7,7 @@ const connection = {
   database: "juegosdb",
   options: {
     encrypt: true,
-    trustServerCertificate: true, // necesario para conexiones locales
+    trustServerCertificate: true,
   },
 };
 
@@ -18,7 +18,7 @@ export async function getConnection() {
     return pool;
   } catch (error) {
     console.error("Error de conexión a SQL Server:", error);
-    return null; // 🔹 evita undefined
+    return null; 
   }
 }
 
