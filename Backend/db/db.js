@@ -4,7 +4,7 @@ const connection = {
   user: "sa",
   password: "123456789", 
   server: "localhost", 
-  database: "juegosdb",
+  database: "IndieIsland",
   options: {
     encrypt: true,
     trustServerCertificate: true,
