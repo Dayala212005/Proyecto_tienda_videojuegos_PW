@@ -17,32 +17,32 @@ function Home() {
       <Header />
 
       <main>
-        
+        <br />
+        <br />
         <div className="animated-gradient-text">
           <span className="text-content">
             Más que juegos, experiencias épicas.
+            <br />
+            <br />
           </span>
         </div>
 
         <section id="destacados">
           <h2>Destacados</h2>
-          {/* <Juego imagen="/imagenes/logo.jpg" alt="Juego destacado" descripcion="Descripción breve del juego destacado" /> */}
-          {/* <Juego imagen="/imagenes/logo.jpg" alt="Juego destacado" descripcion="Descripción breve del juego destacado" /> */}
           <CarouselDestacados />
+          <br />
         </section>
 
         <section id="ofertas">
           <h2>Ofertas</h2>
-          {/*<Juego imagen="/imagenes/logo.jpg" alt="Juego en oferta" descripcion="Descripción breve del juego en oferta" />
-          <Juego imagen="/imagenes/logo.jpg" alt="Juego en oferta" descripcion="Descripción breve del juego en oferta" />*/}
           <CarouselOfertas />
+          <br />
         </section>
 
         <section id="nuevos">
           <h2>Nuevos lanzamientos</h2>
-          {/*<Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />
-          <Juego imagen="/imagenes/logo.jpg" alt="Juego nuevo" descripcion="Descripción breve del juego nuevo" />*/}
           <CarouselNuevosLanzamientos />
+          <br />
         </section>
 
 
