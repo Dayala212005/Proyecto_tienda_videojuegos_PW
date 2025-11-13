@@ -19,7 +19,7 @@ function Login() {
     const res = await fetch("http://localhost:4000/api/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({email, contrasena: password }),
     });
 
     const data = await res.json();
