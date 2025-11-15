@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 function Header() {
   return (
@@ -55,10 +56,10 @@ function Header() {
               </li>
             </ul>
 
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Buscar Juego" aria-label="Search" />
-              <button className="btn btn-warning" type="submit">Buscar</button>
-            </form>
+            <div className="d-flex" style={{ alignItems: "center" }}>
+              <SearchBar />
+            </div>
+
           </div>
         </div>
       </nav>
