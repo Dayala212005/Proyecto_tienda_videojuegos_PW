@@ -2,62 +2,92 @@ import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import { getConnection } from "./db/db.js";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 const PORT = 4000;
-// Llamado a la base de datos
-app.get("/api/favoritos/:userId", (req, res) => {
+
+app.get("/api/favoritos/:userId", async (req, res) => {
   const { userId } = req.params;
 
-  //Datos de prueba (simulan una base de datos)
-  const favoritos = {
-    "1": [540, 521, 452], // usuario 1 tiene 3 juegos favoritos
-    "2": [452, 517, 475], // usuario 2 otros
-  };
+  try {
+    const pool = await getConnection();
+    if (!pool)
+      return res
+        .status(500)
+        .json({ error: "Error de conexión a la base de datos" });
 
-  // Si el usuario no existe, devuelve un arreglo vacío
-  const favoritosUsuario = favoritos[userId] || [];
-  res.json(favoritosUsuario);
+    const result = await pool
+      .request()
+      .input("userId", userId)
+      .query(`SELECT id_juego FROM Favorito WHERE id_usuario = @userId`);
+
+    const favoritos = result.recordset.map((row) => row.juego_id);
+
+    if (!favoritos.length) {
+      return res.json([]); 
+    }
+
+    const gamePromises = favoritos.map(async (id) => {
+      const response = await fetch(
+        `https://www.freetogame.com/api/game?id=${id}`
+      );
+      return response.json();
+    });
+
+    const games = await Promise.all(gamePromises);
+
+    res.json(games); 
+  } catch (error) {
+    console.error("Error al obtener favoritos:", error);
+
+    res.status(500).json({ error: "Error al obtener favoritos" });
+  }
 });
 
 app.use("/api/users", userRoutes);
 
-//Endpoint para obtener tres juegos mas recientes
 app.get("/api/games/release", async (req, res) => {
   try {
-    const respuesta = await fetch("https://www.freetogame.com/api/games?sort-by=release-date");
+    const respuesta = await fetch(
+      "https://www.freetogame.com/api/games?sort-by=release-date"
+    );
     const datos = await respuesta.json();
     const top3 = datos.slice(0, 3);
     res.json(top3);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los juegos" });
   }
-})
+});
 //Endpoint para obtener ofertas
 app.get("/api/games/ofertas", async (req, res) => {
   try {
-    const respuesta = await fetch("https://www.freetogame.com/api/games?sort-by=relevance");
+    const respuesta = await fetch(
+      "https://www.freetogame.com/api/games?sort-by=relevance"
+    );
     const datos = await respuesta.json();
     const top3 = datos.slice(0, 3);
     res.json(top3);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los juegos" });
   }
-})
+});
 
 //Endpoint para obtener los 3 juegos mas populares
 app.get("/api/games/top", async (req, res) => {
   try {
-    const respuesta = await fetch("https://www.freetogame.com/api/games?sort-by=popularity");
+    const respuesta = await fetch(
+      "https://www.freetogame.com/api/games?sort-by=popularity"
+    );
     const datos = await respuesta.json();
     const top3 = datos.slice(0, 3);
     res.json(top3);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los juegos" });
   }
-})
+});
 // Obtener todos los juegos
 app.get("/api/games", async (req, res) => {
   try {
@@ -73,7 +103,9 @@ app.get("/api/games", async (req, res) => {
 app.get("/api/game/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const respuesta = await fetch(`https://www.freetogame.com/api/game?id=${id}`);
+    const respuesta = await fetch(
+      `https://www.freetogame.com/api/game?id=${id}`
+    );
     const datos = await respuesta.json();
     res.json(datos);
   } catch (error) {
@@ -162,7 +194,7 @@ app.get("/api/games/search", async (req, res) => {
         const d = norm(g.short_description);
         return t.includes(nq) || d.includes(nq);
       })
-      .slice(0, 10); 
+      .slice(0, 10);
 
     res.json(results);
   } catch (error) {

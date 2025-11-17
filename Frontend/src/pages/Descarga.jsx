@@ -1,39 +1,33 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Fondo from "../components/fondo";
 import "../styles/styles_compra.css";
 
 export default function Descarga() {
-  // 🔹 ID del usuario (por ahora simulado)
-  const userId = 1;
-
+  const navigate = useNavigate();
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadFavoritos() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // ✅ Redirige sin alert
+        navigate("/login", { state: { message: "Debes iniciar sesión para ver tus favoritos" } });
+        return;
+      }
+
       try {
-        // 1️⃣ Obtener IDs favoritos del usuario
-        const favRes = await fetch(`http://localhost:4000/api/favoritos/${userId}`);
-        const favoritos = await favRes.json(); // Ej: [540, 521, 452]
-
-        // 2️⃣ Si no hay favoritos, salimos
-        if (!favoritos.length) {
-          setGames([]);
-          setLoading(false);
-          return;
-        }
-
-        // 3️⃣ Obtener detalles de cada juego favorito desde tu API
-        const gamePromises = favoritos.map(async (id) => {
-          const res = await fetch(`http://localhost:4000/api/game/${id}`);
-          return res.json();
+        const favRes = await fetch(`http://localhost:4000/api/favoritos/1`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         });
 
-        const gameData = await Promise.all(gamePromises);
-        setGames(gameData);
+        const favoritos = await favRes.json();
+        setGames(favoritos);
       } catch (e) {
         console.error("Error al cargar favoritos", e);
       } finally {
@@ -42,7 +36,7 @@ export default function Descarga() {
     }
 
     loadFavoritos();
-  }, []);
+  }, [navigate]);
 
   if (loading) return <p style={{ textAlign: "center", color: "#fff" }}>Cargando tus juegos...</p>;
 
@@ -51,10 +45,11 @@ export default function Descarga() {
       <>
         <Header />
         <main>
-          <Fondo />
+          
           <h1 id="Titulo">Tus Juegos Favoritos</h1>
           <p style={{ textAlign: "center", color: "#ccc" }}>Aún no tienes juegos favoritos.</p>
         </main>
+        <Fondo />
         <Footer />
       </>
     );
@@ -63,10 +58,8 @@ export default function Descarga() {
     <>
       <Fondo />
       <Header />
-
       <main>
         <h1 id="Titulo">Tus Juegos Favoritos</h1>
-
         <div className="cart-container">
           {games.map((game) => (
             <Link
@@ -89,7 +82,6 @@ export default function Descarga() {
           ))}
         </div>
       </main>
-
       <Footer />
     </>
   );

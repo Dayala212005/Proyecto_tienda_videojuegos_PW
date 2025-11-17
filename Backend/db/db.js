@@ -2,7 +2,7 @@ import mssql from "mssql";
 
 const connection = {
   user: "sa",
-  password: "123456789", 
+  password: "123456", 
   server: "localhost", 
   database: "IndieIsland",
   options: {
