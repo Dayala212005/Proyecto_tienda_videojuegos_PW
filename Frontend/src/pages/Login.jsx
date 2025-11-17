@@ -30,6 +30,7 @@ function Login() {
     } else {
       alert(data.message || "Error al iniciar sesión");
     }
+    res.status(200).json({ message: "Inicio de sesión exitoso", token });
   };
 
   return (

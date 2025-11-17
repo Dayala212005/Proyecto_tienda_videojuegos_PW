@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Fondo from "../components/fondo.jsx"; // ✅ fondo galaxia como en Home
 import "../styles/styles_juegos.css";
+import BotonFavorito from "../components/BotonFavorito.jsx";
 
 function DetalleJuego() {
   const { id } = useParams();
@@ -130,6 +131,7 @@ function DetalleJuego() {
               <div className="row-item"><span className="label">Editor:</span><span>{game.publisher || "N/D"}</span></div>
               <div className="row-item"><span className="label">Plataforma:</span><span>{game.platform || "N/D"}</span></div>
               <div className="row-item"><span className="label">Género:</span><span>{game.genre || "N/D"}</span></div>
+              <BotonFavorito juegoId={game.id} />
             </div>
 
             {tags.length > 0 && (

@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import { getConnection } from "./db/db.js";
+import verifyToken from "./middlewares/decodeId.js";
 
 const app = express();
 app.use(express.json());
@@ -24,10 +25,10 @@ app.get("/api/favoritos/:userId", async (req, res) => {
       .input("userId", userId)
       .query(`SELECT id_juego FROM Favorito WHERE id_usuario = @userId`);
 
-    const favoritos = result.recordset.map((row) => row.juego_id);
+    const favoritos = result.recordset.map((row) => row.id_juego);
 
     if (!favoritos.length) {
-      return res.json([]); 
+      return res.json([]);
     }
 
     const gamePromises = favoritos.map(async (id) => {
@@ -39,7 +40,7 @@ app.get("/api/favoritos/:userId", async (req, res) => {
 
     const games = await Promise.all(gamePromises);
 
-    res.json(games); 
+    res.json(games);
   } catch (error) {
     console.error("Error al obtener favoritos:", error);
 
@@ -48,6 +49,62 @@ app.get("/api/favoritos/:userId", async (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+// Añadir juego a favoritos
+app.post("/api/favoritos/:juegoId", verifyToken, async (req, res) => {
+  const { juegoId } = req.params;
+  const userId = req.user.id_usuario // ✅ Cambiado
+
+  try {
+    const pool = await getConnection();
+    await pool.request()
+      .input("userId", userId)
+      .input("juegoId", juegoId)
+      .query(`INSERT INTO dbo.favorito (id_usuario, id_juego) VALUES (@userId, @juegoId)`);
+
+    res.json({ message: "Juego añadido a favoritos" });
+  } catch (error) {
+    console.error("Error al añadir favorito:", error);
+    res.status(500).json({ error: "Error al añadir favorito" });
+  }
+});
+
+// Eliminar juego de favoritos
+app.delete("/api/favoritos/:juegoId", verifyToken, async (req, res) => {
+  const { juegoId } = req.params;
+  const userId = req.user.id_usuario; // ✅ Cambiado
+
+  try {
+    const pool = await getConnection();
+    await pool.request()
+      .input("userId", userId)
+      .input("juegoId", juegoId)
+      .query(`DELETE FROM dbo.favorito WHERE id_usuario = @userId AND id_juego = @juegoId`);
+
+    res.json({ message: "Juego eliminado de favoritos" });
+  } catch (error) {
+    console.error("Error al eliminar favorito:", error);
+    res.status(500).json({ error: "Error al eliminar favorito" });
+  }
+});
+
+// Verificar si el juego está en favoritos
+app.get("/api/favoritos/check/:juegoId", verifyToken, async (req, res) => {
+  const { juegoId } = req.params;
+  const userId = req.user.id_usuario; // ✅ Cambiado
+
+  try {
+    const pool = await getConnection();
+    const result = await pool.request()
+      .input("userId", userId)
+      .input("juegoId", juegoId)
+      .query(`SELECT COUNT(*) AS count FROM dbo.favorito WHERE id_usuario = @userId AND id_juego = @juegoId`);
+
+    res.json({ esFavorito: result.recordset[0].count > 0 });
+  } catch (error) {
+    console.error("Error al verificar favorito:", error);
+    res.status(500).json({ error: "Error al verificar favorito" });
+  }
+});
 
 app.get("/api/games/release", async (req, res) => {
   try {
