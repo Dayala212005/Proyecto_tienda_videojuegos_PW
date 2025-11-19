@@ -54,7 +54,7 @@ function Home() {
             <CategoriaLink nombre="Aventura" imagen="/imagenes/aventura.png" />
             <CategoriaLink nombre="Deportes" imagen="/imagenes/sports.jpg" />
             <CategoriaLink nombre="Simulación" imagen="/imagenes/simulacion.jpg" />
-            <CategoriaLink nombre="Rol/MMORPG" imagen="/imagenes/rol.jpg" />
+            <CategoriaLink nombre="Rol_MMORPG" imagen="/imagenes/rol.jpg" />
             <CategoriaLink nombre="Puzzle" imagen="/imagenes/puzzel.webp" />
             <CategoriaLink nombre="Estrategia" imagen="/imagenes/estrategia.webp" />
             <CategoriaLink nombre="Multijugador" imagen="/imagenes/sports2.png" />

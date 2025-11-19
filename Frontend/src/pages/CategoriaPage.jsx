@@ -24,7 +24,8 @@ function CategoriaPage() {
           Deportes: "sports",
           Estrategia: "strategy",
           Simulación: "first-person",
-          RolMMORPG: "mmo",
+          Multijugador: "pvp",
+          Rol_MMORPG: "mmo",
           Indie: "anime",
           Puzzle: "card"
         };
