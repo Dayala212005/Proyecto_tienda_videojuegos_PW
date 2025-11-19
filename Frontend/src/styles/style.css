@@ -306,3 +306,7 @@ footer p {
 .search-texts .title { color:#fff; font-weight:600; font-size:.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .search-texts .meta { color:#b5b5b5; font-size:.85rem; }
 .search-item.muted { color:#b5b5b5; justify-content:center; }
+
+.juego p {
+  margin-right: auto;   
+}

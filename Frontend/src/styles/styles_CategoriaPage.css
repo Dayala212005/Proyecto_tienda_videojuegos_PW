@@ -6,7 +6,7 @@
     margin: 0 auto 30px auto; 
     color: #f7f9fa;
     text-align: center;
-    font-size: 3rem;          /* tamaño grande (puede ajustar) */
+    font-size: 3rem;          
     transition: text-shadow 0.3s ease;
 }
 .titulo-categoria:hover {

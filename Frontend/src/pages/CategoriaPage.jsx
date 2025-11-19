@@ -23,9 +23,8 @@ function CategoriaPage() {
           Aventura: "fantasy",
           Deportes: "sports",
           Estrategia: "strategy",
-          Simulación: "simulation",
-          Rol: "mmorpg",
-          "Rol/MMORPG": "mmorpg",
+          Simulación: "first-person",
+          RolMMORPG: "mmo",
           Indie: "anime",
           Puzzle: "card"
         };
@@ -53,14 +52,14 @@ function CategoriaPage() {
       <Header />
       <main>
         <h2 className="titulo-categoria">Juegos de {nombre}</h2>
-    
+
         {cargando ? (
           <p>Cargando juegos...</p>
         ) : juegos.length > 0 ? (
           <div className="juegos-grid">
             {juegos.map((juego) => (
               <Juego
-                id = {juego.id}
+                id={juego.id}
                 imagen={juego.thumbnail}
                 alt={juego.title}
                 descripcion={juego.title}
