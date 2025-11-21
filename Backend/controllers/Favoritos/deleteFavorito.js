@@ -5,6 +5,7 @@ export const removeFavorito = async (req, res) => {
     const id_usuario = req.user?.id_usuario; // <-- FIX
     const id_juego = parseInt(req.params.idJuego, 10);
 
+    if (!id_usuario) return res.status(401).json({ message: "Usuario no identificado" });
     if (!id_juego) return res.status(400).json({ message: "Falta id del juego" });
 
     const pool = await getConnection();
