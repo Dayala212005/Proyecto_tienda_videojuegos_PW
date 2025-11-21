@@ -1,7 +1,7 @@
 // routes/favoritoRoutes.js
 import express from "express";
 
-import verifyToken from "../middlewares/verifyToken.js";
+import verifyToken from "../utils/middlewares/verifyToken.js";
 
 import{ removeFavorito } from "../controllers/Favoritos/deleteFavorito.js";
 import { addFavorito } from "../controllers/Favoritos/postFavorito.js";
