@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { PORT } from './keys/keys.js';
+// import { PORT } from './keys/keys.js';
 
 import userRoutes from "./routes/userRoutes.js";
 import favoritoRoutes from "./routes/favoritoRoutes.js";
@@ -9,6 +9,8 @@ import juegosRoutes from "./routes/juegosRoutes.js";
 
 
 const app = express();
+const PORT = process.env.PORT || 4000;
+
 app.use(express.json());
 app.use(cors());
 
