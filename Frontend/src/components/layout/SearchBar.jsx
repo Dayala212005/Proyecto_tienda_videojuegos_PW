@@ -64,7 +64,7 @@ export default function SearchBar() {
     setOpen(false);
     setQ("");
     setItems([]);
-    navigate(`/juego/${game.id}`);
+    navigate(`/game/${game.id}`);
   };
 
   const onKeyDown = (e) => {
