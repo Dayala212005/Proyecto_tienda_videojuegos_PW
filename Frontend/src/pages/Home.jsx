@@ -1,8 +1,7 @@
 import Header from "../components/layout/Header.jsx";
 import Footer from "../components/layout/Footer.jsx";
 
-import Juego from "../components/Juego";
-import Categoria from "../components/Categoria";
+
 import CarouselDestacados from "../components/carruseles/CarouselDestacados.jsx";
 import CarouselNuevosLanzamientos from "../components/carruseles/CarouselNuevosLanzamientos.jsx";
 import CarouselOfertas from "../components/carruseles/CarouselOfertas.jsx";
