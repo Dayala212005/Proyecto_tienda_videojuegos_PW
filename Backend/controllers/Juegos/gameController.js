@@ -138,11 +138,13 @@ export const getGamesBySort = async (req, res) => {
 // Buscar juegos por texto
 // app.get("/api/games/search", 
 
+// controllers/Juegos/gameController.js
+
 export const getGamesBySearch = async (req, res) => {
   const q = (req.query.q || "").trim();
-  if (!q) return res.json([]);
+  if (!q) return res.json([]); // Si no hay query, devolvemos array vacío
 
-  const norm = (s) =>
+  const normalize = (s) =>
     (s || "")
       .toString()
       .normalize("NFD")
@@ -150,22 +152,33 @@ export const getGamesBySearch = async (req, res) => {
       .toLowerCase();
 
   try {
-    const respuesta = await fetch("https://www.freetogame.com/api/games");
-    const datos = await respuesta.json();
+    const response = await fetch("https://www.freetogame.com/api/games");
+    if (!response.ok) {
+      console.error("Error al consultar la API externa", response.status);
+      return res.json([]); // devolvemos array vacío si falla
+    }
 
-    const nq = norm(q);
-    const results = datos
-      .filter((g) => {
-        const t = norm(g.title);
-        const d = norm(g.short_description);
-        return t.includes(nq) || d.includes(nq);
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      console.error("La API externa no devolvió un array", data);
+      return res.json([]); // devolvemos array vacío si no es array
+    }
+
+    const nq = normalize(q);
+    const results = data
+      .filter((game) => {
+        const title = normalize(game.title);
+        const desc = normalize(game.short_description);
+        return title.includes(nq) || desc.includes(nq);
       })
       .slice(0, 10);
 
     res.json(results);
   } catch (error) {
-    console.error("Error endpoint:", error);
-    res.status(500).json({ error: "Error al buscar juegos" });
+    console.error("Error en endpoint /games/search:", error);
+    res.status(500).json([]); // devolvemos array vacío si hay error
   }
 };
+
 
