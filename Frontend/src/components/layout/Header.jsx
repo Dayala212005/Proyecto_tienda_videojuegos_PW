@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { logout } from "../../utils/auth";
 
 function Header() {
   return (
     <div className="d-flex align-items-center">
-      
+
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-grow-1">
         <div className="container-fluid">
           <Link className="navbar-brand me-3" to="/">
-        <img src="/imagenes/Logo2.png" alt="Mi Logo" width="60" height="auto" />
-      </Link>
+            <img src="/imagenes/Logo2.png" alt="Mi Logo" width="60" height="auto" />
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -29,12 +30,7 @@ function Header() {
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
 
-              {/* 🔹 Nuevo botón Favoritos que lleva a /descarga */}
-              <li className="nav-item">
-                <Link className="btn btn-outline-warning ms-2" to="/descarga">
-                  ⭐ Favoritos
-                </Link>
-              </li>
+
 
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,6 +45,25 @@ function Header() {
                   <li>
                     <Link className="dropdown-item" to="/register">
                       Registrarse
+                    </Link>
+                  </li>
+                </ul>
+
+              </li>
+
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Perfil
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="btn btn-outline-warning ms-2" to="/favoritos">
+                      ⭐ Favoritos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link onClick={logout} className="dropdown-item" to="/login">
+                      Cerrar Sesión
                     </Link>
                   </li>
                 </ul>

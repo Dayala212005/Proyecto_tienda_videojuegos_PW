@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Fondo from "../components/fondo.jsx"; // ✅ fondo galaxia como en Home
+import Header from "../components/layout/Header.jsx";
+import Footer from "../components/layout/Footer.jsx";
+import Fondo from "../components/fondos/FondoPrincipal.jsx"; 
 import "../styles/styles_juegos.css";
-import BotonFavorito from "../components/BotonFavorito.jsx";
+import BotonFavorito from "../components/layout/BotonFavorito.jsx";
+
+
+
 
 function DetalleJuego() {
   const { id } = useParams();
@@ -19,7 +22,7 @@ function DetalleJuego() {
     let alive = true;
     async function load() {
       try {
-        const res = await fetch(`http://localhost:4000/api/game/${id}`);
+        const res = await fetch(`http://localhost:4000/api/games/${id}`);
         const data = await res.json();
         if (alive) {
           setGame(data);
@@ -77,7 +80,6 @@ function DetalleJuego() {
     <>
     <Fondo />
       <Header />
-      {/* ✅ mismo patrón que Home: Fondo + overlay detrás del contenido */}
       <main id="main" className="page-with-bg">
         <div className="bg-overlay" />
 
@@ -147,11 +149,10 @@ function DetalleJuego() {
 
             {/* Solo botón Descargar */}
             <div className="panel panel-cta">
-              <Link to={`/descarga/${game.id}`} className="checkout-btn full">
+              <Link to={`/descarga/${game.id}`} className="btn-descargar centrar-boton">
                 Descargar gratis
               </Link>
             </div>
-
             <div className="panel panel-req">
               <h3>Requisitos mínimos</h3>
               <ul>

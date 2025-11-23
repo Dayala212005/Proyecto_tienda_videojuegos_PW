@@ -1,4 +1,4 @@
-import Galaxy from './Galaxy';
+import Galaxy from '../fondos/Galaxy.jsx';
 
 function Fondo() {
     return (

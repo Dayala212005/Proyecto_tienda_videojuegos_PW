@@ -1,12 +1,13 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/layout/Header.jsx";
+import Footer from "../components/layout/Footer.jsx";
+
 import Juego from "../components/Juego";
 import Categoria from "../components/Categoria";
-import CarouselDestacados from "../components/CarouselDestacados";
-import CarouselNuevosLanzamientos from "../components/CarouselNuevosLanzamientos.jsx";
-import CarouselOfertas from "../components/CarouselOfertas.jsx";
+import CarouselDestacados from "../components/carruseles/CarouselDestacados.jsx";
+import CarouselNuevosLanzamientos from "../components/carruseles/CarouselNuevosLanzamientos.jsx";
+import CarouselOfertas from "../components/carruseles/CarouselOfertas.jsx";
 import "../styles/style.css";
-import Fondo from "../components/fondo.jsx";
+import Fondo from "../components/fondos/FondoPrincipal.jsx"; 
 import CategoriaLink from "../components/CategoriaLink";
 
 

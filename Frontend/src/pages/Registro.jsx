@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/style_cuenta.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Fondo from "../components/FondoCuenta.jsx"; 
+import Header from "../components/layout/Header.jsx";
+import Footer from "../components/layout/Footer.jsx";
+import Fondo from "../components/fondos/FondoCuenta.jsx"; 
 
 
 function Register() {

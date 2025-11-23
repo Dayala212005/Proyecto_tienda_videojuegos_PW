@@ -1,4 +1,4 @@
-import LiquidEther from './LiquidEther.jsx';
+import LiquidEther from '../fondos/LiquidEther.jsx';
 
 function Fondo() {
     return (

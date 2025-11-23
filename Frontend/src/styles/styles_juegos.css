@@ -63,6 +63,46 @@ body {
 #descripcion-juego{
     color: #c9d1d9;
 }
+.btn-descargar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+
+  background: linear-gradient(90deg, #08b0ff 0%, #15a1ff 40%, #2a87ff 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 6px 18px rgba(18, 58, 120, 0.45),
+    inset 0 10px 24px rgba(255, 255, 255, 0.06),
+    0 0 28px rgba(27, 124, 255, 0.18);
+
+  transform: translateZ(0);
+  transition: transform 160ms cubic-bezier(.2, .9, .2, 1),
+              box-shadow 160ms;
+}
+
+.btn-descargar:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow:
+    0 10px 26px rgba(18, 58, 120, 0.52),
+    inset 0 10px 30px rgba(255, 255, 255, 0.08),
+    0 0 36px rgba(27, 124, 255, 0.22);
+}
+
+.btn-descargar:active {
+  transform: translateY(0) scale(0.995);
+  box-shadow:
+    0 6px 16px rgba(18, 58, 120, 0.35),
+    inset 0 6px 16px rgba(0, 0, 0, 0.2);
+}
 
 #botones-compra button {
     background-color: #238636;
@@ -75,6 +115,14 @@ body {
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
 }
+
+.centrar-boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;   /* ocupa todo el ancho */
+}
+
 
 #botones-compra button:hover {
     background-color: #2ea043;

@@ -10,8 +10,8 @@ function Juego({ id, imagen, alt, descripcion }) {
 
       <p>{descripcion}</p>
 
-      {/*  botón descarga -> Descarga */}
-      <Link to={`/juego/${id}`} className="checkout-btn">
+      {/*  botón detalle */}
+      <Link to={`/juego/${id}`} className="btn-descargar">
         Detalle del juego
       </Link>
     </div>
