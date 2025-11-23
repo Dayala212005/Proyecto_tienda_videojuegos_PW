@@ -14,10 +14,10 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
-app.use(cors({
-  origin: "*", 
-  credentials: true
-}));
+// app.use(cors({
+//   origin: "*", 
+//   credentials: true
+// }));
 
 app.use("/api/users", userRoutes);
 
