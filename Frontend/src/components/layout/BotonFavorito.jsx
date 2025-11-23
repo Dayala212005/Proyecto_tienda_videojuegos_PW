@@ -12,7 +12,7 @@ export default function BotonFavorito({ juegoId }) {
       const token = localStorage.getItem("token");
       if (!token) return setIsFav(false);
       try {
-        const res = await fetch("http://localhost:4000/api/favoritos", {
+        const res = await fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/favoritos", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) return;
@@ -35,7 +35,7 @@ export default function BotonFavorito({ juegoId }) {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4000/api/favoritos/add", {
+      const res = await fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/favoritos/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export default function BotonFavorito({ juegoId }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:4000/api/favoritos/${juegoId}`, {
+      const res = await fetch(`https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/favoritos/${juegoId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
