@@ -1,85 +1,84 @@
+// components/SearchBar.jsx
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const [q, setQ] = useState("");
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [focusIndex, setFocusIndex] = useState(-1);
   const ref = useRef(null);
   const navigate = useNavigate();
 
+  // Buscar juegos cuando cambie query
   useEffect(() => {
-    if (!q.trim()) {
-      setItems([]);
+    if (!query.trim()) {
+      setResults([]);
       setOpen(false);
       return;
     }
 
     setLoading(true);
-    const timer = setTimeout(async () => {
+    const timeout = setTimeout(async () => {
       try {
         const res = await fetch(
-          `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(q)}`
+          `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(query)}`
         );
+        const data = await res.json();
 
-        if (!res.ok) {
-          console.error("Error en la respuesta del backend", res.status);
-          setItems([]);
-          setOpen(false);
-          return;
+        if (!Array.isArray(data)) {
+          setResults([]);
+        } else {
+          setResults(data);
         }
 
-        const data = await res.json();
-        // Asegurarnos que data es array antes de map
-        setItems(Array.isArray(data) ? data : []);
         setOpen(true);
-      } catch (e) {
-        console.error("Error al buscar juegos", e);
-        setItems([]);
-        setOpen(false);
+      } catch (err) {
+        console.error("Error al buscar juegos:", err);
+        setResults([]);
       } finally {
         setLoading(false);
       }
     }, 300);
 
-    return () => clearTimeout(timer);
-  }, [q]);
+    return () => clearTimeout(timeout);
+  }, [query]);
 
-  // Cerrar dropdown al hacer click afuera
+  // Cerrar dropdown al hacer click fuera
   useEffect(() => {
-    const onClickOutside = (e) => {
+    function handleClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
         setFocusIndex(-1);
       }
-    };
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Seleccionar juego
   const handleSelect = (game) => {
-    if (!game) return;
     setOpen(false);
-    setQ("");
-    setItems([]);
-    navigate(`/game/${game.id}`);
+    setQuery("");
+    setResults([]);
+    navigate(`/juego/${game.id}`);
   };
 
+  // Navegación con teclado
   const onKeyDown = (e) => {
-    if (!open || items.length === 0) return;
+    if (!open || results.length === 0) return;
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setFocusIndex((i) => (i + 1) % items.length);
+      setFocusIndex((i) => (i + 1) % results.length);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setFocusIndex((i) => (i - 1 + items.length) % items.length);
+      setFocusIndex((i) => (i - 1 + results.length) % results.length);
     } else if (e.key === "Enter") {
       e.preventDefault();
       const i = focusIndex >= 0 ? focusIndex : 0;
-      handleSelect(items[i]);
+      handleSelect(results[i]);
     } else if (e.key === "Escape") {
       setOpen(false);
       setFocusIndex(-1);
@@ -87,31 +86,42 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="searchbar" ref={ref}>
+    <div className="searchbar" ref={ref} style={{ position: "relative" }}>
       <input
-        id="buscar_juegos"
         type="text"
         placeholder="Buscar juegos..."
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        onFocus={() => items.length > 0 && setOpen(true)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => results.length > 0 && setOpen(true)}
         onKeyDown={onKeyDown}
         aria-autocomplete="list"
         aria-expanded={open}
         aria-controls="search-listbox"
+        style={{ padding: "8px", width: "100%" }}
       />
-
       {open && (
-        <div className="search-dropdown" role="listbox" id="search-listbox">
+        <div
+          className="search-dropdown"
+          role="listbox"
+          id="search-listbox"
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            background: "#fff",
+            border: "1px solid #ccc",
+            maxHeight: "300px",
+            overflowY: "auto",
+            zIndex: 1000,
+          }}
+        >
           {loading && <div className="search-item muted">Buscando…</div>}
-
-          {!loading && items.length === 0 && (
+          {!loading && results.length === 0 && (
             <div className="search-item muted">Sin resultados</div>
           )}
-
           {!loading &&
-            Array.isArray(items) &&
-            items.map((g, i) => (
+            results.map((g, i) => (
               <button
                 key={g.id}
                 type="button"
@@ -119,11 +129,27 @@ export default function SearchBar() {
                 onMouseEnter={() => setFocusIndex(i)}
                 onMouseLeave={() => setFocusIndex(-1)}
                 onClick={() => handleSelect(g)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  padding: "6px 8px",
+                  background: i === focusIndex ? "#f0f0f0" : "#fff",
+                  border: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
+                }}
               >
-                <img src={g.thumbnail} alt={g.title} />
-                <div className="search-texts">
-                  <span className="title">{g.title}</span>
-                  <span className="meta">{g.genre} • {g.platform}</span>
+                <img
+                  src={g.thumbnail}
+                  alt={g.title}
+                  style={{ width: "50px", height: "50px", marginRight: "8px" }}
+                />
+                <div>
+                  <div style={{ fontWeight: "bold" }}>{g.title}</div>
+                  <div style={{ fontSize: "12px", color: "#666" }}>
+                    {g.genre} • {g.platform}
+                  </div>
                 </div>
               </button>
             ))}

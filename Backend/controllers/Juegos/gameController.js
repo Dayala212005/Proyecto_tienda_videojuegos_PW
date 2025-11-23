@@ -140,45 +140,31 @@ export const getGamesBySort = async (req, res) => {
 
 // controllers/Juegos/gameController.js
 
-export const getGamesBySearch = async (req, res) => {
+// controllers/juegosController.js
+export const searchGames = async (req, res) => {
   const q = (req.query.q || "").trim();
-  if (!q) return res.json([]); // Si no hay query, devolvemos array vacío
-
-  const normalize = (s) =>
-    (s || "")
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
+  if (!q) return res.json([]);
 
   try {
     const response = await fetch("https://www.freetogame.com/api/games");
-    if (!response.ok) {
-      console.error("Error al consultar la API externa", response.status);
-      return res.json([]); // devolvemos array vacío si falla
-    }
-
     const data = await response.json();
 
-    if (!Array.isArray(data)) {
-      console.error("La API externa no devolvió un array", data);
-      return res.json([]); // devolvemos array vacío si no es array
-    }
+    if (!Array.isArray(data)) return res.json([]);
 
-    const nq = normalize(q);
     const results = data
-      .filter((game) => {
-        const title = normalize(game.title);
-        const desc = normalize(game.short_description);
-        return title.includes(nq) || desc.includes(nq);
-      })
+      .filter(
+        (g) =>
+          g.title.toLowerCase().includes(q.toLowerCase()) ||
+          g.short_description.toLowerCase().includes(q.toLowerCase())
+      )
       .slice(0, 10);
 
     res.json(results);
-  } catch (error) {
-    console.error("Error en endpoint /games/search:", error);
-    res.status(500).json([]); // devolvemos array vacío si hay error
+  } catch (err) {
+    console.error("Error buscando juegos:", err);
+    res.status(500).json({ error: "Error buscando juegos" });
   }
 };
+
 
 
