@@ -5,7 +5,7 @@ function CarouselOfertas() {
   const [topGames, setTopGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/games/ofertas")
+    fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/ofertas")
       .then((res) => res.json())
       .then((data) => setTopGames(data))
       .catch((err) => console.error("Error al obtener datos", err));

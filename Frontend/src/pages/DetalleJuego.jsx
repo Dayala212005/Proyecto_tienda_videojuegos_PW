@@ -19,7 +19,7 @@ function DetalleJuego() {
     let alive = true;
     async function load() {
       try {
-        const res = await fetch(`http://localhost:4000/api/games/${id}`);
+        const res = await fetch(`https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/${id}`);
         const data = await res.json();
         if (alive) {
           setGame(data);

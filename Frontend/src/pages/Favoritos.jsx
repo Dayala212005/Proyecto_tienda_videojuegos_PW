@@ -21,7 +21,7 @@ useEffect(() => {
   const load = async () => {
     try {
       // 1. Obtener IDs desde tu backend
-      const res = await fetch("http://localhost:4000/api/favoritos", {
+      const res = await fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/favoritos", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -44,7 +44,7 @@ useEffect(() => {
       }
 
       // 2. Solicitar detalles desde tu backend
-      const res2 = await fetch("http://localhost:4000/api/favoritos/detalles", {
+      const res2 = await fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/favoritos/detalles", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

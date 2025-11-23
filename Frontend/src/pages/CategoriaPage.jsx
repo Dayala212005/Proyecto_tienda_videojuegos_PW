@@ -32,7 +32,7 @@ function CategoriaPage() {
 
         const categoria = categoriaAPI[nombre] || nombre.toLowerCase();
 
-        const response = await fetch(`http://localhost:4000/api/games/category/${categoria}`);
+        const response = await fetch(`https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/category/${categoria}`);
         if (!response.ok) throw new Error("Error al obtener los juegos");
 
         const data = await response.json();
