@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = "super_secreto123";
+import { JWT_SECRET } from "../../keys/keys.js";
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
