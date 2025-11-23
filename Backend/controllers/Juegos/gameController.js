@@ -141,30 +141,34 @@ export const getGamesBySort = async (req, res) => {
 // controllers/Juegos/gameController.js
 
 // controllers/juegosController.js
-export const searchGames = async (req, res) => {
+export const getGamesBySearch = async (req, res) => {
   const q = (req.query.q || "").trim();
   if (!q) return res.json([]);
 
+  const norm = (s) =>
+    (s || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
   try {
-    const response = await fetch("https://www.freetogame.com/api/games");
-    const data = await response.json();
+    const respuesta = await fetch("https://www.freetogame.com/api/games");
+    const datos = await respuesta.json();
 
-    if (!Array.isArray(data)) return res.json([]);
-
-    const results = data
-      .filter(
-        (g) =>
-          g.title.toLowerCase().includes(q.toLowerCase()) ||
-          g.short_description.toLowerCase().includes(q.toLowerCase())
-      )
+    const nq = norm(q);
+    const results = datos
+      .filter((g) => {
+        const t = norm(g.title);
+        return t.startsWith(nq); // solo títulos que comiencen con la letra
+      })
       .slice(0, 10);
 
     res.json(results);
-  } catch (err) {
-    console.error("Error buscando juegos:", err);
-    res.status(500).json({ error: "Error buscando juegos" });
+  } catch (error) {
+    console.error("Error endpoint:", error);
+    res.status(500).json([]);
   }
 };
-
 
 
