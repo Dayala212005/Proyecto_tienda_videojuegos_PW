@@ -2,12 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/layout/Header.jsx";
 import Footer from "../components/layout/Footer.jsx";
-import Fondo from "../components/fondos/FondoPrincipal.jsx"; 
+import Fondo from "../components/fondos/FondoPrincipal.jsx";
 import "../styles/styles_juegos.css";
 import BotonFavorito from "../components/layout/BotonFavorito.jsx";
-
-
-
 
 function DetalleJuego() {
   const { id } = useParams();
@@ -34,12 +31,14 @@ function DetalleJuego() {
       }
     }
     load();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, [id]);
 
   const screenshots = game?.screenshots || [];
   const mainShot = useMemo(
-    () => (screenshots[activeShot]?.image || game?.thumbnail || ""),
+    () => screenshots[activeShot]?.image || game?.thumbnail || "",
     [screenshots, activeShot, game]
   );
 
@@ -50,7 +49,9 @@ function DetalleJuego() {
         <main id="main" className="page-with-bg">
           <Fondo />
           <div className="bg-overlay" />
-          <p style={{ padding: 24, position: "relative", zIndex: 1 }}>Cargando juego...</p>
+          <p style={{ padding: 24, position: "relative", zIndex: 1 }}>
+            Cargando juego...
+          </p>
         </main>
         <Footer />
       </>
@@ -64,7 +65,9 @@ function DetalleJuego() {
         <main id="main" className="page-with-bg">
           <Fondo />
           <div className="bg-overlay" />
-          <p style={{ padding: 24, position: "relative", zIndex: 1 }}>No se encontró el juego.</p>
+          <p style={{ padding: 24, position: "relative", zIndex: 1 }}>
+            No se encontró el juego.
+          </p>
         </main>
         <Footer />
       </>
@@ -78,12 +81,15 @@ function DetalleJuego() {
 
   return (
     <>
-    <Fondo />
+      <Fondo />
       <Header />
       <main id="main" className="page-with-bg">
         <div className="bg-overlay" />
 
-        <section id="detalle-juego" className="detalle-layout content-foreground">
+        <section
+          id="detalle-juego"
+          className="detalle-layout content-foreground"
+        >
           {/* Columna izquierda: galería */}
           <div className="detalle-media">
             <div
@@ -92,7 +98,11 @@ function DetalleJuego() {
               style={{ cursor: mainShot ? "zoom-in" : "default" }}
             >
               {mainShot ? (
-                <img src={mainShot} alt={game.title} className="detalle-hero-img" />
+                <img
+                  src={mainShot}
+                  alt={game.title}
+                  className="detalle-hero-img"
+                />
               ) : (
                 <div className="detalle-hero-placeholder">Sin imagen</div>
               )}
@@ -128,11 +138,26 @@ function DetalleJuego() {
           {/* Columna derecha */}
           <aside className="detalle-sidebar">
             <div className="panel panel-info">
-              <div className="row-item"><span className="label">Lanzamiento:</span><span>{game.release_date || "N/D"}</span></div>
-              <div className="row-item"><span className="label">Desarrollador:</span><span>{game.developer || "N/D"}</span></div>
-              <div className="row-item"><span className="label">Editor:</span><span>{game.publisher || "N/D"}</span></div>
-              <div className="row-item"><span className="label">Plataforma:</span><span>{game.platform || "N/D"}</span></div>
-              <div className="row-item"><span className="label">Género:</span><span>{game.genre || "N/D"}</span></div>
+              <div className="row-item">
+                <span className="label">Lanzamiento:</span>
+                <span>{game.release_date || "N/D"}</span>
+              </div>
+              <div className="row-item">
+                <span className="label">Desarrollador:</span>
+                <span>{game.developer || "N/D"}</span>
+              </div>
+              <div className="row-item">
+                <span className="label">Editor:</span>
+                <span>{game.publisher || "N/D"}</span>
+              </div>
+              <div className="row-item">
+                <span className="label">Plataforma:</span>
+                <span>{game.platform || "N/D"}</span>
+              </div>
+              <div className="row-item">
+                <span className="label">Género:</span>
+                <span>{game.genre || "N/D"}</span>
+              </div>
               <BotonFavorito juegoId={game.id} />
             </div>
 
@@ -141,26 +166,63 @@ function DetalleJuego() {
                 <h3>Etiquetas</h3>
                 <div className="tags-wrap">
                   {tags.map((t, i) => (
-                    <span key={`${t}-${i}`} className="tag">{t}</span>
+                    <span key={`${t}-${i}`} className="tag">
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Solo botón Descargar */}
+            {/* Solo botón Descargar (web oficial) */}
             <div className="panel panel-cta">
-              <Link to={`/descarga/${game.id}`} className="btn-descargar centrar-boton">
-                Descargar gratis
-              </Link>
+              {game.game_url ? (
+                <a
+                  href={game.game_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-descargar centrar-boton"
+                >
+                  Descargar gratis
+                </a>
+              ) : (
+                <a
+                  href={game.freetogame_profile_url || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-descargar centrar-boton"
+                  onClick={(e) => {
+                    if (!game.freetogame_profile_url) {
+                      e.preventDefault();
+                      alert(
+                        "No hay enlace oficial disponible para este juego."
+                      );
+                    }
+                  }}
+                >
+                  Ver en FreeToGame
+                </a>
+              )}
             </div>
+
             <div className="panel panel-req">
               <h3>Requisitos mínimos</h3>
               <ul>
-                <li><b>OS:</b> {req.os || "N/D"}</li>
-                <li><b>CPU:</b> {req.processor || "N/D"}</li>
-                <li><b>RAM:</b> {req.memory || "N/D"}</li>
-                <li><b>GPU:</b> {req.graphics || "N/D"}</li>
-                <li><b>Almacenamiento:</b> {req.storage || "N/D"}</li>
+                <li>
+                  <b>OS:</b> {req.os || "N/D"}
+                </li>
+                <li>
+                  <b>CPU:</b> {req.processor || "N/D"}
+                </li>
+                <li>
+                  <b>RAM:</b> {req.memory || "N/D"}
+                </li>
+                <li>
+                  <b>GPU:</b> {req.graphics || "N/D"}
+                </li>
+                <li>
+                  <b>Almacenamiento:</b> {req.storage || "N/D"}
+                </li>
               </ul>
             </div>
           </aside>
@@ -171,7 +233,11 @@ function DetalleJuego() {
       {/* Modal fullscreen */}
       {modalOpen && (
         <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-          <img src={mainShot} alt="Vista ampliada" className="modal-fullscreen-img" />
+          <img
+            src={mainShot}
+            alt="Vista ampliada"
+            className="modal-fullscreen-img"
+          />
         </div>
       )}
     </>
