@@ -16,38 +16,51 @@ export default function SearchBar() {
       setOpen(false);
       return;
     }
+
     setLoading(true);
-    const t = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       try {
         const res = await fetch(
           `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(q)}`
         );
+
+        if (!res.ok) {
+          console.error("Error en la respuesta del backend", res.status);
+          setItems([]);
+          setOpen(false);
+          return;
+        }
+
         const data = await res.json();
+        // Asegurarnos que data es array antes de map
         setItems(Array.isArray(data) ? data : []);
-        setItems(data);
         setOpen(true);
       } catch (e) {
         console.error("Error al buscar juegos", e);
         setItems([]);
+        setOpen(false);
       } finally {
         setLoading(false);
       }
-    }, 300); 
-    return () => clearTimeout(t);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [q]);
 
+  // Cerrar dropdown al hacer click afuera
   useEffect(() => {
-    function onClickOutside(e) {
+    const onClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
         setFocusIndex(-1);
       }
-    }
+    };
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
   const handleSelect = (game) => {
+    if (!game) return;
     setOpen(false);
     setQ("");
     setItems([]);
@@ -56,6 +69,7 @@ export default function SearchBar() {
 
   const onKeyDown = (e) => {
     if (!open || items.length === 0) return;
+
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setFocusIndex((i) => (i + 1) % items.length);
@@ -86,21 +100,25 @@ export default function SearchBar() {
         aria-expanded={open}
         aria-controls="search-listbox"
       />
+
       {open && (
         <div className="search-dropdown" role="listbox" id="search-listbox">
           {loading && <div className="search-item muted">Buscando…</div>}
+
           {!loading && items.length === 0 && (
             <div className="search-item muted">Sin resultados</div>
           )}
+
           {!loading &&
+            Array.isArray(items) &&
             items.map((g, i) => (
               <button
                 key={g.id}
+                type="button"
                 className={`search-item ${i === focusIndex ? "active" : ""}`}
                 onMouseEnter={() => setFocusIndex(i)}
                 onMouseLeave={() => setFocusIndex(-1)}
                 onClick={() => handleSelect(g)}
-                type="button"
               >
                 <img src={g.thumbnail} alt={g.title} />
                 <div className="search-texts">
