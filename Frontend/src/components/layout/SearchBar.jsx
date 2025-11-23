@@ -16,22 +16,29 @@ export default function SearchBar() {
       setOpen(false);
       return;
     }
+
     setLoading(true);
     const t = setTimeout(async () => {
       try {
         const res = await fetch(
           `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(q)}`
         );
-        const data = await res.json();
+        let data = await res.json();
+
+        // 🚀 Aseguramos que siempre sea un array
+        if (!Array.isArray(data)) data = [];
+
         setItems(data);
         setOpen(true);
       } catch (e) {
         console.error("Error al buscar juegos", e);
         setItems([]);
+        setOpen(false);
       } finally {
         setLoading(false);
       }
-    }, 300); 
+    }, 300);
+
     return () => clearTimeout(t);
   }, [q]);
 
@@ -50,7 +57,7 @@ export default function SearchBar() {
     setOpen(false);
     setQ("");
     setItems([]);
-    navigate(`/juego/${game.id}`);
+    if (game && game.id) navigate(`/juego/${game.id}`);
   };
 
   const onKeyDown = (e) => {
@@ -92,6 +99,7 @@ export default function SearchBar() {
             <div className="search-item muted">Sin resultados</div>
           )}
           {!loading &&
+            Array.isArray(items) &&
             items.map((g, i) => (
               <button
                 key={g.id}
