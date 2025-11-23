@@ -160,15 +160,15 @@ export const getGamesBySearch = async (req, res) => {
     const results = datos
       .filter((g) => {
         const t = norm(g.title);
-        return t.startsWith(nq); // solo títulos que comiencen con la letra
+        const d = norm(g.short_description);
+        return t.includes(nq) || d.includes(nq);
       })
-      .slice(0, 10);
+      .slice(0, 10); 
 
     res.json(results);
   } catch (error) {
     console.error("Error endpoint:", error);
-    res.status(500).json([]);
+    res.status(500).json({ error: "Error al buscar juegos" });
   }
 };
-
 

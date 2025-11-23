@@ -1,84 +1,70 @@
-// components/SearchBar.jsx
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
-  const [query, setQuery] = useState("");
+  const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState([]);
+  const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
   const [focusIndex, setFocusIndex] = useState(-1);
   const ref = useRef(null);
   const navigate = useNavigate();
 
-  // Buscar juegos cuando cambie query
   useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
+    if (!q.trim()) {
+      setItems([]);
       setOpen(false);
       return;
     }
-
     setLoading(true);
-    const timeout = setTimeout(async () => {
+    const t = setTimeout(async () => {
       try {
         const res = await fetch(
-          `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(query)}`
+          `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(q)}`
         );
         const data = await res.json();
-
-        if (!Array.isArray(data)) {
-          setResults([]);
-        } else {
-          setResults(data);
-        }
-
+        setItems(data);
         setOpen(true);
-      } catch (err) {
-        console.error("Error al buscar juegos:", err);
-        setResults([]);
+      } catch (e) {
+        console.error("Error al buscar juegos", e);
+        setItems([]);
       } finally {
         setLoading(false);
       }
-    }, 300);
+    }, 300); 
+    return () => clearTimeout(t);
+  }, [q]);
 
-    return () => clearTimeout(timeout);
-  }, [query]);
-
-  // Cerrar dropdown al hacer click fuera
   useEffect(() => {
-    function handleClickOutside(e) {
+    function onClickOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
         setFocusIndex(-1);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  // Seleccionar juego
   const handleSelect = (game) => {
     setOpen(false);
-    setQuery("");
-    setResults([]);
+    setQ("");
+    setItems([]);
     navigate(`/juego/${game.id}`);
   };
 
-  // Navegación con teclado
   const onKeyDown = (e) => {
-    if (!open || results.length === 0) return;
-
+    if (!open || items.length === 0) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setFocusIndex((i) => (i + 1) % results.length);
+      setFocusIndex((i) => (i + 1) % items.length);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setFocusIndex((i) => (i - 1 + results.length) % results.length);
+      setFocusIndex((i) => (i - 1 + items.length) % items.length);
     } else if (e.key === "Enter") {
       e.preventDefault();
       const i = focusIndex >= 0 ? focusIndex : 0;
-      handleSelect(results[i]);
+      handleSelect(items[i]);
     } else if (e.key === "Escape") {
       setOpen(false);
       setFocusIndex(-1);
@@ -86,70 +72,39 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="searchbar" ref={ref} style={{ position: "relative" }}>
+    <div className="searchbar" ref={ref}>
       <input
+        id="buscar_juegos"
         type="text"
         placeholder="Buscar juegos..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => results.length > 0 && setOpen(true)}
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        onFocus={() => items.length > 0 && setOpen(true)}
         onKeyDown={onKeyDown}
         aria-autocomplete="list"
         aria-expanded={open}
         aria-controls="search-listbox"
-        style={{ padding: "8px", width: "100%" }}
       />
       {open && (
-        <div
-          className="search-dropdown"
-          role="listbox"
-          id="search-listbox"
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            background: "#fff",
-            border: "1px solid #ccc",
-            maxHeight: "300px",
-            overflowY: "auto",
-            zIndex: 1000,
-          }}
-        >
+        <div className="search-dropdown" role="listbox" id="search-listbox">
           {loading && <div className="search-item muted">Buscando…</div>}
-          {!loading && results.length === 0 && (
+          {!loading && items.length === 0 && (
             <div className="search-item muted">Sin resultados</div>
           )}
           {!loading &&
-            results.map((g, i) => (
+            items.map((g, i) => (
               <button
                 key={g.id}
-                type="button"
                 className={`search-item ${i === focusIndex ? "active" : ""}`}
                 onMouseEnter={() => setFocusIndex(i)}
                 onMouseLeave={() => setFocusIndex(-1)}
                 onClick={() => handleSelect(g)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "100%",
-                  padding: "6px 8px",
-                  background: i === focusIndex ? "#f0f0f0" : "#fff",
-                  border: "none",
-                  textAlign: "left",
-                  cursor: "pointer",
-                }}
+                type="button"
               >
-                <img
-                  src={g.thumbnail}
-                  alt={g.title}
-                  style={{ width: "50px", height: "50px", marginRight: "8px" }}
-                />
-                <div>
-                  <div style={{ fontWeight: "bold" }}>{g.title}</div>
-                  <div style={{ fontSize: "12px", color: "#666" }}>
-                    {g.genre} • {g.platform}
-                  </div>
+                <img src={g.thumbnail} alt={g.title} />
+                <div className="search-texts">
+                  <span className="title">{g.title}</span>
+                  <span className="meta">{g.genre} • {g.platform}</span>
                 </div>
               </button>
             ))}
