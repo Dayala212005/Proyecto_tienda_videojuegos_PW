@@ -20,7 +20,7 @@ export default function SearchBar() {
     const t = setTimeout(async () => {
       try {
         const res = await fetch(
-          `http://localhost:4000/api/games/search?q=${encodeURIComponent(q)}`
+          `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${encodeURIComponent(q)}`
         );
         const data = await res.json();
         setItems(data);
