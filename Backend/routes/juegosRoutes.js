@@ -1,7 +1,7 @@
 // routes/favoritoRoutes.js
 import express from "express";
 
-import { getRelease, getOfertas, getTop, getAllGames, getGameById, getGamesByPlatform, getGamesByCategory, getGamesBySort, getGamesBySearch, searchGames} from "../controllers/Juegos/gameController.js";
+import { getRelease, getOfertas, getTop, getAllGames, getGameById, getGamesByPlatform, getGamesByCategory, getGamesBySort} from "../controllers/Juegos/gameController.js";
 
 
 const router = express.Router();
