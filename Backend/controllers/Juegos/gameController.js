@@ -138,64 +138,34 @@ export const getGamesBySort = async (req, res) => {
 // Buscar juegos por texto
 // app.get("/api/games/search", 
 
-// controllers/Juegos/gameController.js
+// Buscar juegos por texto
+export const getGamesBySearch = async (req, res) => {
+  const q = (req.query.q || "").trim();
+  if (!q) return res.json([]);
 
-// controllers/juegosController.js
-// export const getGamesBySearch = async (req, res) => {
-//   const q = (req.query.q || "").trim();
-//   if (!q) return res.json([]);
+  const norm = (s) =>
+    (s || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
 
-//   const norm = (s) =>
-//     (s || "")
-//       .toString()
-//       .normalize("NFD")
-//       .replace(/[\u0300-\u036f]/g, "")
-//       .toLowerCase();
+  try {
+    const respuesta = await fetch("https://www.freetogame.com/api/games");
+    const datos = await respuesta.json();
 
-//   try {
-//     const respuesta = await fetch("https://www.freetogame.com/api/games");
-//     const datos = await respuesta.json();
+    const nq = norm(q);
+    const results = datos
+      .filter((g) => {
+        const t = norm(g.title);
+        const d = norm(g.short_description);
+        return t.includes(nq) || d.includes(nq);
+      })
+      .slice(0, 10);
 
-//     const nq = norm(q);
-//     const results = datos
-//       .filter((g) => {
-//         const t = norm(g.title);
-//         const d = norm(g.short_description);
-//         return t.includes(nq) || d.includes(nq);
-//       })
-//       .slice(0, 10); 
-
-//     res.json(results);
-//   } catch (error) {
-//     console.error("Error endpoint:", error);
-//     res.status(500).json({ error: "Error al buscar juegos" });
-//   }
-// };
-
-// // Endpoint para buscar juegos por nombre
-// // app.get("/api/games/search", 
-
-// export const searchGames = async (req, res) => {
-//   const { q } = req.query;
-
-//   try {
-//     const respuesta = await fetch("https://www.freetogame.com/api/games");
-//     const datos = await respuesta.json();
-
-//     // Si no viene texto, devolvé nada, así no cargamos todo
-//     if (!q || q.trim() === "") {
-//       return res.json([]);
-//     }
-
-//     const texto = q.toLowerCase();
-
-//     const filtrados = datos.filter((game) =>
-//       game.title.toLowerCase().includes(texto)
-//     );
-
-//     res.json(filtrados);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Error al buscar juegos" });
-//   }
-// };
+    res.json(results);
+  } catch (error) {
+    console.error("Error endpoint:", error);
+    res.status(500).json({ error: "Error al buscar juegos" });
+  }
+};
