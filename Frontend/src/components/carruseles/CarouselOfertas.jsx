@@ -27,8 +27,8 @@ function CarouselOfertas() {
               <h5>{g.title}</h5>
               <p>{g.short_description}</p>
               {/* ✅ descarga -> Descarga */}
-              <Link to={`/descarga/${g.id}`} className="btn-descargar">
-                Descargar
+              <Link to={`/juego/${g.id}`} className="btn-descargar">
+                Detalle Juego
               </Link>
             </div>
           </div>

@@ -35,8 +35,8 @@ function CarouselDestacados() {
               <p>{g.short_description}</p>
 
               {/* ✅ botón -> Descarga */}
-              <Link to={`/descarga/${g.id}`} className="btn-descargar" style={{ textDecoration: "none" }}>
-                Descargar
+              <Link to={`/juego/${g.id}`} className="btn-descargar" style={{ textDecoration: "none" }}>
+                Detalle Juego
               </Link>
             </div>
           </div>

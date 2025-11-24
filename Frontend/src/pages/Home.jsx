@@ -34,7 +34,7 @@ function Home() {
         </section>
 
         <section id="ofertas">
-          <h2>Ofertas</h2>
+          <h2>Recomendados</h2>
           <CarouselOfertas />
           <br />
         </section>
