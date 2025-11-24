@@ -14,8 +14,8 @@ router.get("/:id", getGameById);
 router.get("/platform/:platform", getGamesByPlatform);
 router.get("/category/:category", getGamesByCategory);
 router.get("/sort/:orden", getGamesBySort);
-router.get("/search", getGamesBySearch);
-router.get("/search", searchGames);
+// router.get("/search", getGamesBySearch);
+// router.get("/search", searchGames);
 
 
 
