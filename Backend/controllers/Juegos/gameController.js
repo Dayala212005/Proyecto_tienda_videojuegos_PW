@@ -172,3 +172,30 @@ export const getGamesBySearch = async (req, res) => {
   }
 };
 
+// Endpoint para buscar juegos por nombre
+// app.get("/api/games/search", 
+
+export const searchGames = async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    const respuesta = await fetch("https://www.freetogame.com/api/games");
+    const datos = await respuesta.json();
+
+    // Si no viene texto, devolvé nada, así no cargamos todo
+    if (!q || q.trim() === "") {
+      return res.json([]);
+    }
+
+    const texto = q.toLowerCase();
+
+    const filtrados = datos.filter((game) =>
+      game.title.toLowerCase().includes(texto)
+    );
+
+    res.json(filtrados);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al buscar juegos" });
+  }
+};

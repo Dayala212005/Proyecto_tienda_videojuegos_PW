@@ -1,56 +1,78 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-function SearchBar() {
+export default function SearchBar() {
+  const [query, setQuery] = useState("");
   const [games, setGames] = useState([]);
-  const [search, setSearch] = useState("");
-  const [filtered, setFiltered] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // Cargar todos los juegos al montar el componente
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const res = await fetch("https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/games");
-        const data = await res.json();
-        setGames(data);
-      } catch (err) {
-        console.error("Error cargando juegos:", err);
-      }
-    };
+    if (query.trim() === "") {
+      setGames([]);
+      return;
+    }
 
-    fetchGames();
-  }, []);
+    const delay = setTimeout(() => {
+      buscarJuegos(query);
+    }, 300);
 
-  // Filtrar cada vez que cambia el texto
-  useEffect(() => {
-    const results = games.filter((juego) =>
-      juego.title.toLowerCase().includes(search.toLowerCase())
-    );
-    setFiltered(results);
-  }, [search, games]);
+    return () => clearTimeout(delay);
+  }, [query]);
+
+  const buscarJuegos = async (texto) => {
+    try {
+      setLoading(true);
+
+      const respuesta = await fetch(
+        `https://proyecto-tienda-videojuegos-pw-ofuz.onrender.com/api/games/search?q=${texto}`
+      );
+      const datos = await respuesta.json();
+      setGames(datos);
+    } catch (error) {
+      console.error("Error buscando juegos", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="w-full max-w-lg mx-auto mt-6">
+    <div style={{ width: "350px", margin: "20px auto" }}>
       <input
         type="text"
         placeholder="Buscar juegos..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "6px",
+          border: "1px solid #ccc",
+        }}
       />
 
-      {/* Lista de juegos filtrados */}
-      {search.length > 0 && (
-        <ul className="mt-4 bg-white p-3 rounded-lg shadow">
-          {filtered.length === 0 && (
-            <li className="text-gray-500">No hay juegos con ese nombre 😔</li>
-          )}
+      {loading && <p>Cargando...</p>}
 
-          {filtered.map((juego) => (
+      {!loading && games.length > 0 && (
+        <ul
+          style={{
+            marginTop: "10px",
+            listStyle: "none",
+            padding: 0,
+            border: "1px solid #ddd",
+            borderRadius: "6px",
+            maxHeight: "250px",
+            overflowY: "auto",
+          }}
+        >
+          {games.map((game) => (
             <li
-              key={juego.id}
-              className="p-2 border-b last:border-none hover:bg-gray-100 cursor-pointer"
+              key={game.id}
+              style={{
+                padding: "10px",
+                borderBottom: "1px solid #eee",
+                cursor: "pointer",
+              }}
             >
-              {juego.title}
+              {game.title}
             </li>
           ))}
         </ul>
@@ -58,5 +80,3 @@ function SearchBar() {
     </div>
   );
 }
-
-export default SearchBar;
