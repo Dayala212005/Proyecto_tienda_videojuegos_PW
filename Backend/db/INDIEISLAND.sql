@@ -1,7 +1,4 @@
-CREATE DATABASE IndieIsland;
-GO
-USE IndieIsland;
-GO
+USE administrador_IndieIsland;
 
 CREATE TABLE USUARIO(
 id_usuario INT IDENTITY(1,1) PRIMARY KEY,
