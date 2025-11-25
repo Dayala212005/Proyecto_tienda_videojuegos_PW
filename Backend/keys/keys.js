@@ -1,2 +1,2 @@
-export const JWT_SECRET = "TwentyOnePilots"; 
-export const HASH_COMPLEXITY = 10;
+export const JWT_SECRET = process.env.JWT_SECRET;
+export const HASH_COMPLEXITY = Number(process.env.HASH_COMPLEXITY);
