@@ -22,9 +22,7 @@ router.get("/category/:category", getGamesByCategory);
 router.get("/sort/:orden", getGamesBySort);
 router.get("/search", getGamesBySearch);
 
-
 router.get("/", getAllGames);
-
 
 router.get("/:id", getGameById);
 
