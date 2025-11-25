@@ -1,6 +1,4 @@
-
-// app.get("/api/games/release", 
-
+//Endpoint para obtener los 3 juegos mas recientes
 export const getRelease = async (req, res) => {
   try {
     const respuesta = await fetch(
@@ -13,9 +11,8 @@ export const getRelease = async (req, res) => {
     res.status(500).json({ error: "Error al obtener los juegos" });
   }
 };
-//Endpoint para obtener ofertas
-// app.get("/api/games/ofertas", 
 
+//Endpoint para obtener ofertas
 export const getOfertas = async (req, res) => {
   try {
     const respuesta = await fetch(
@@ -30,8 +27,6 @@ export const getOfertas = async (req, res) => {
 };
 
 //Endpoint para obtener los 3 juegos mas populares
-// app.get("/api/games/top", 
-    
 export const getTop = async (req, res) => {
   try {
     const respuesta = await fetch(
@@ -46,8 +41,6 @@ export const getTop = async (req, res) => {
 };
 
 // Obtener todos los juegos
-// app.get("/api/games", 
-
 export const getAllGames = async (req, res) => {
   try {
     const respuesta = await fetch("https://www.freetogame.com/api/games");
@@ -59,8 +52,6 @@ export const getAllGames = async (req, res) => {
 };
 
 // Obtener un juego por ID
-// app.get("/api/game/:id", 
-
 export const getGameById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -75,8 +66,6 @@ export const getGameById = async (req, res) => {
 };
 
 // Filtrar por plataforma
-// app.get("/api/games/platform/:platform", 
-
 export const getGamesByPlatform = async (req, res) => {
   const { platform } = req.params;
   const url = new URL(`https://www.freetogame.com/api/games`);
@@ -95,8 +84,6 @@ export const getGamesByPlatform = async (req, res) => {
 };
 
 // // Filtrar por categoría
-// app.get("/api/games/category/:category", 
-    
 export const getGamesByCategory = async (req, res) => {
   const { category } = req.params;
   const url = new URL(`https://www.freetogame.com/api/games`);
@@ -115,8 +102,6 @@ export const getGamesByCategory = async (req, res) => {
 };
 
 // Ordenar (sort-by)
-// // app.get("/api/games/sort/:orden", 
-    
 export const getGamesBySort = async (req, res) => {
   const { orden } = req.params;
   const url = new URL(`https://www.freetogame.com/api/games`);
@@ -134,9 +119,6 @@ export const getGamesBySort = async (req, res) => {
   }
 };
 
-
-// Buscar juegos por texto
-// app.get("/api/games/search", 
 
 // Buscar juegos por texto
 export const getGamesBySearch = async (req, res) => {
