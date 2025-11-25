@@ -18,7 +18,7 @@ function CarouselOfertas() {
       <div className="carousel-inner">
         {topGames.slice(0, 3).map((g, i) => (
           <div key={g.id} className={`carousel-item ${i === 0 ? "active" : ""}`}>
-            {/* ✅ imagen -> Detalle */}
+        
             <Link to={`/juego/${g.id}`} style={{ textDecoration: "none" }}>
               <img src={g.thumbnail} className="d-block w-100" alt={g.title} />
             </Link>
@@ -26,7 +26,7 @@ function CarouselOfertas() {
             <div className="carousel-caption d-none d-md-block">
               <h5>{g.title}</h5>
               <p>{g.short_description}</p>
-              {/* ✅ descarga -> Descarga */}
+     
               <Link to={`/juego/${g.id}`} className="btn-descargar">
                 Detalle Juego
               </Link>

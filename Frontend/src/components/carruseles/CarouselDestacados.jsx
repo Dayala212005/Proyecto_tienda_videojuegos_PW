@@ -20,7 +20,7 @@ function CarouselDestacados() {
       <div className="carousel-inner">
         {topGames.slice(0, 3).map((g, i) => (
           <div key={g.id} className={`carousel-item ${i === 0 ? "active" : ""}`}>
-            {/* ✅ imagen -> Detalle */}
+           
             <Link to={`/juego/${g.id}`} style={{ textDecoration: "none" }}>
               <img
                 src={g.thumbnail}
@@ -34,7 +34,7 @@ function CarouselDestacados() {
               <h5>{g.title}</h5>
               <p>{g.short_description}</p>
 
-              {/* ✅ botón -> Descarga */}
+              
               <Link to={`/juego/${g.id}`} className="btn-descargar" style={{ textDecoration: "none" }}>
                 Detalle Juego
               </Link>

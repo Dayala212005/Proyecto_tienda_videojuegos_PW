@@ -11,8 +11,8 @@ import { getDetallesFavorito } from "../controllers/Favoritos/getDetallesFavorit
 
 const router = express.Router();
 
-router.post("/add", verifyToken, addFavorito);         // body: { id_juego }
-router.get("/", verifyToken, getFavoritos);            // devuelve { favoritos: [id1, id2, ...] }
+router.post("/add", verifyToken, addFavorito);// body: { id_juego }
+router.get("/", verifyToken, getFavoritos); // devuelve { favoritos: [id1, id2, ...] }
 router.delete("/:idJuego", verifyToken, removeFavorito); // elimina favorito por idJuego
 router.post("/detalles", verifyToken, getDetallesFavorito);
 

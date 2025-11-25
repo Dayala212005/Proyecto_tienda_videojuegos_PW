@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-// ejemplo de ruta protegida
+// ejemplo de ruta protegida para pruebas de token
 router.get("/perfil", verifyToken, (req, res) => {
   res.json({ message: "Acceso autorizado", user: req.user });
 });

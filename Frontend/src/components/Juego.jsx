@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Juego({ id, imagen, alt, descripcion }) {
   return (
     <div className="juego">
-      {/*  click en imagen -> Detalle */}
+      {/*  click en imagen - Detalle */}
       <Link to={`/juego/${id}`} style={{ textDecoration: "none" }}>
         <img src={imagen} alt={alt} width="100" />
       </Link>

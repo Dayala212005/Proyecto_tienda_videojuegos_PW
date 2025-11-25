@@ -18,7 +18,7 @@ function CarouselNuevosLanzamientos() {
       <div className="carousel-inner">
         {topGames.slice(0, 3).map((g, i) => (
           <div key={g.id} className={`carousel-item ${i === 0 ? "active" : ""}`}>
-            {/* ✅ imagen -> Detalle */}
+            
             <Link to={`/juego/${g.id}`} style={{ textDecoration: "none" }}>
               <img src={g.thumbnail} className="d-block w-100" alt={g.title} />
             </Link>
