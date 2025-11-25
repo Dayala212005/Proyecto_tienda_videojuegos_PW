@@ -223,7 +223,9 @@ footer p {
   font-size: 0.9rem;
   color: #888;
 }
-
+.titulo-blanco {
+  color: white !important;
+}
 /* ======== CAROUSEL DESTACADOS ======== */
 .carousel-container {
   width: 90%;

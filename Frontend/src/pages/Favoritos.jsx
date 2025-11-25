@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/layout/Header.jsx";
 import Footer from "../components/layout/Footer.jsx";
 import Fondo from "../components/fondos/FondoPrincipal.jsx"; 
+import "../styles/style.css";
 
 export default function Favoritos() {
   const [games, setGames] = useState([]);
@@ -86,9 +87,9 @@ useEffect(() => {
       <main id="main">
        
         <div className="container content-foreground" style={{ padding: 24 }}>
-          <h2>Mis Favoritos</h2>
+          <h2 className="titulo-blanco">Mis Favoritos</h2>
           {games.length === 0 ? (
-            <p>No tienes favoritos aún.</p>
+            <p className="titulo-blanco">No tienes favoritos aún.</p>
           ) : (
             <div className="row">
               {games.map((g) => (
